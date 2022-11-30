@@ -4,19 +4,15 @@ Trumpas apibendrinimas kas yra, ko trūksta ir kas dar bus.
 
 Padaryta:
 
-1.Filmų CRUD
-
-2.Kino teatrų CRUD
-
-3.Seansų CRUD
+1. Filmų CRUD
+2. Kino teatrų CRUD
+3. Seansų CRUD
 
 Trūksta:
 
-1.Autorizacijos pricipas padarytas, tačiau dar pilnai nepritaikytas.
-
-2.Bilietų CRUD
-
-3.Iki galo nepadaryta registracija ir prisijungimas visoms roles.
+1. Autorizacijos pricipas padarytas, tačiau dar pilnai nepritaikytas.
+2. Bilietų CRUD
+3. Iki galo nepadaryta registracija ir prisijungimas visoms roles.
 
 Kas bus toliau:
 
