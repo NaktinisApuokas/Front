@@ -43,13 +43,6 @@ namespace FobumCinema.Controllers
             var cinema = await _CinemaRepository.Get(id);
             if (cinema == null) return NotFound($"Cinema with id '{id}' not found.");
 
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, cinema, PolicyNames.SameUser);
-
-            if (!authorizationResult.Succeeded)
-            {
-                return Forbid();
-            }
-
             return Ok(_mapper.Map<CinemaDto>(cinema));
         }
 

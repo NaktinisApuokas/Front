@@ -99,21 +99,17 @@ namespace FobumCinema.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreationTimeUtc")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Cinema");
                 });
@@ -133,12 +129,15 @@ namespace FobumCinema.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Genre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -179,6 +178,30 @@ namespace FobumCinema.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Screening");
+                });
+
+            modelBuilder.Entity("FobumCinema.Data.Entities.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreationTimeUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ScreeningId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Seat")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScreeningId");
+
+                    b.ToTable("Ticket");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -314,17 +337,6 @@ namespace FobumCinema.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FobumCinema.Data.Entities.Cinema", b =>
-                {
-                    b.HasOne("FobumCinema.Data.Dtos.Auth.FobumCinemaUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("FobumCinema.Data.Entities.Movie", b =>
                 {
                     b.HasOne("FobumCinema.Data.Entities.Cinema", "Cinema")
@@ -345,6 +357,17 @@ namespace FobumCinema.Migrations
                         .IsRequired();
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("FobumCinema.Data.Entities.Ticket", b =>
+                {
+                    b.HasOne("FobumCinema.Data.Entities.Screening", "Screening")
+                        .WithMany()
+                        .HasForeignKey("ScreeningId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Screening");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

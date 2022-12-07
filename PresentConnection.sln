@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentConnection", "PresentConnection\PresentConnection.csproj", "{D36C3557-10BC-45A4-9C47-27A585650EA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FobumCinema", "PresentConnection\FobumCinema.csproj", "{D36C3557-10BC-45A4-9C47-27A585650EA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

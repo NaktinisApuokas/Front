@@ -10,10 +10,11 @@ namespace FobumCinema.Data
         public DbSet<Cinema> Cinema { get; set; }
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Screening> Screening { get; set; }
+        public DbSet<Ticket> Ticket { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=FobumCinema");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=presentcon");
         }
     }
 }
