@@ -2,22 +2,29 @@ PresentConectionProjektas
 
 Trumpas apibendrinimas kas yra, ko trūksta ir kas dar bus.
 
+Antra savaitė :
+
 Padaryta:
 
 1. Filmų CRUD
 2. Kino teatrų CRUD
 3. Seansų CRUD
 
+Trečia savaitė:
+
+Padaryta: 
+
+1. Bilietų CRUD
+2. Sutvarkyta daug klaidų iš praeitos savaitės
+
+
 Trūksta:
 
 1. Autorizacijos pricipas padarytas, tačiau dar pilnai nepritaikytas.
-2. Bilietų CRUD
-3. Iki galo nepadaryta registracija ir prisijungimas visoms roles.
+2. Pasidaryti likusi Front'ą.
+3. Pasibaigus pirmus du punktus implementuoti autorizacija ir į front'ą.
 
-Kas bus toliau:
+Planuoju pridėti dar papildomų API point'ų:
 
-1. Norėčiau pradėti darytis front'ą.
-2. Pasibaigti autorizacija.
-3. Bilietų CRUD
-4. Pridėti numatytas roles ir joms priskirti funkcinius reikalavimus
-
+Peržiūrėti visus egzistuojančius filmus.
+Sukurti filmų paiešką.
