@@ -1,23 +1,27 @@
 PresentConectionProjektas
 
-Trumpas apibendrinimas kas yra, ko trūksta ir kas dar bus.
+Ketvirta savaitė
+
+Trumpas apibendrinimas kas yra, kas yra nepilnai padaryta ir kas dar bus.
 
 Padaryta:
 
-1. Filmų CRUD
-2. Kino teatrų CRUD
-3. Seansų CRUD
+1. Filmų CRUD (Back and Front)
+2. Kino teatrų CRUD (Back and Front)
+3. Seansų CRUD (Back and Front)
+4. Bilietų CRUD (Back)(Bet planuoju išmesti bilietų crud ir daryti kitokiu būdu(papasakosiu per paskaitą))
+5. Registracija (Back and Front)
 
-Trūksta:
+nepilnai padaryta:
 
-1. Autorizacijos pricipas padarytas, tačiau dar pilnai nepritaikytas.
-2. Bilietų CRUD
-3. Iki galo nepadaryta registracija ir prisijungimas visoms roles.
+1. Autorizacija (Back yra, Front truksta viska priskirti rolems)
 
 Kas bus toliau:
 
-1. Norėčiau pradėti darytis front'ą.
-2. Pasibaigti autorizacija.
-3. Bilietų CRUD
-4. Pridėti numatytas roles ir joms priskirti funkcinius reikalavimus
+Kolkas kodas nėra optimalus ir turi daug klaidų, ateinančią savaitę bandysiu pašalinti kuo daugiau pasikartojančio kodo.
+Taip pat noriu patobulinti išvaizdą 
+(vietoj paprasto sąrašo, sąrašą su elementai kurie turi nuotraukas ir ant jų paspaudus asmuo nukreipiamas toliau.(dabar tam yra atskiras mygtukas))
+
+1. Pasibaigti autorizacija. (Front)
+2. Pridėti numatytas roles ir joms priskirti funkcinius reikalavimus (Back and front)
 

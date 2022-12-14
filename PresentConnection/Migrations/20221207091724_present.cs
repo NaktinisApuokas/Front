@@ -4,7 +4,7 @@
 
 namespace FobumCinema.Migrations
 {
-    public partial class present : Migration
+    public partial class Present : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

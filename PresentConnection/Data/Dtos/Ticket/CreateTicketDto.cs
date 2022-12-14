@@ -2,5 +2,5 @@
 
 namespace FobumCinema.Data.Dtos.Ticket
 {
-    public record CreateTicketDto([Required] int Id, [Required] int Seat);
+    public record CreateTicketDto([Required] int Seat);
 }

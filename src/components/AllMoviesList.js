@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function AllMoviesList(movies){
-  if(!movies==null){
+  if(movies.data!=null){
     return (
       <div className="table-resposive mt-5">
         <table className="table table-bordered border-dark">

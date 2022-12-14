@@ -1,33 +1,38 @@
+
 import React from "react"
+import { Link } from "react-router-dom";
+import routes from '../constants/routes';
+import DeleteButton from './DeleteButton';
+import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import EditButton from "./EditButton";
+
+const url = routes + "/cinemas/";
 
 export default function CinemasList(cinemas){
-  if(!cinemas==null){
-  return (
-      <div className="table-resposive mt-5">
-        <table className="table table-bordered border-dark">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Information</th>
-            </tr>
-          </thead>
-          <tbody>
-          {cinemas.map((cinema) => (
-              <tr key={cinema.id}>
-                <td>{cinema.name}</td>
-                <td>{cinema.address}</td>
-              </tr>
-            ))
-          }
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-  return (
-    <div className="table-resposive mt-5">
-      <h4>No Cinemas </h4>
-    </div>
-  )
-  
+return (
+  <MDBTable>
+    <MDBTableHead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </MDBTableHead>
+    <MDBTableBody>
+    {cinemas.map((cinema) => (
+        <tr key={cinema.id}>
+          <td>{cinema.name}</td>
+          <td>{cinema.address}</td>
+          <td><Link style={{ textDecoration: 'none', color: 'Black' }} to="/movies" state={{ type:cinema.id}}> View Movies </Link></td>
+          <td>{EditButton({ type:cinema.id}, "/edit_cinema")}</td>
+          <td>{DeleteButton(cinema.id, url)}</td>
+        </tr>
+      ))
+    }
+    </MDBTableBody>
+  </MDBTable>
+);
 }
+  

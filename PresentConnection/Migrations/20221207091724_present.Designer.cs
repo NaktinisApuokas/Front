@@ -13,7 +13,7 @@ namespace FobumCinema.Migrations
 {
     [DbContext(typeof(FobumCinemaContext))]
     [Migration("20221207091724_present")]
-    partial class present
+    partial class Present
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

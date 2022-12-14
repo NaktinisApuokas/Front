@@ -4,11 +4,13 @@ using FobumCinema.Auth;
 using FobumCinema.Auth.Model;
 using FobumCinema.Data.Dtos.Auth;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.Controllers
 {
+    [EnableCors]
     [ApiController]
     [AllowAnonymous]
     [Route("api")]

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FobumCinema.Data.Dtos.Screening
+﻿namespace FobumCinema.Data.Dtos.Screening
 {
-    public record UpdateScreeningDto( string Price, DateTime Time);
+    public record UpdateScreeningDto(int Hall,  float Price, int Seatnumber);
 }

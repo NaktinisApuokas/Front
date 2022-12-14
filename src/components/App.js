@@ -5,7 +5,14 @@ import Header from "./header";
 import Login from "../pages/Login";
 import AllMoviesList from "./AllMoviesList";
 import Register from "../pages/Register";
-import CreateCinema from "../pages/CreateCinema";
+import Movies from "../pages/Movies";
+import AddMovie from "../pages/AddMovie";
+import AddCinema from "../pages/AddCinema";
+import AddScreening from "../pages/AddScreening";
+import Screening from "../pages/Screening";
+import EditCinema from "../pages/EditCinema";
+import EditMovie from "../pages/EditMovie";
+import EditScreening from "../pages/EditScreening";
 
 export default function App() {
   return (
@@ -13,10 +20,21 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
-          <Route path="movies" element={<AllMoviesList />} />
+          <Route path="allmovies" element={<AllMoviesList />} />
+
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="add_cinema" element={<CreateCinema />} />
+
+          <Route path="add_cinema" element={<AddCinema />} />
+          <Route path="edit_cinema" element={<EditCinema />} />
+
+          <Route path="movies" element={<Movies />} />
+          <Route path="add_movie" element={<AddMovie />} />
+          <Route path="edit_movie" element={<EditMovie />} />
+
+          <Route path="screenings" element={<Screening />} />
+          <Route path="add_screening" element={<AddScreening />} />
+          <Route path="edit_screening" element={<EditScreening />} />
         </Route>
       </Routes>
     </BrowserRouter>

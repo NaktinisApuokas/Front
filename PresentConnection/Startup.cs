@@ -51,7 +51,14 @@ namespace FobumCinema
             });
             services.AddSingleton<IAuthorizationHandler, AuthHandler>();
 
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("corspolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
             services.AddDbContext<FobumCinemaContext>();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
@@ -71,6 +78,7 @@ namespace FobumCinema
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseCors("corspolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
