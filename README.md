@@ -2,7 +2,7 @@ PresentConectionProjektas
 
 Ketvirta savaitė
 
-Trumpas apibendrinimas kas yra, kas yra nepilnai padaryta ir kas dar bus.
+Trumpas apibendrinimas kas projekte jau yra(bent jau funkcionalumo prasme), kas yra nepilnai padaryta ir kas dar bus.
 
 Padaryta:
 
@@ -11,6 +11,8 @@ Padaryta:
 3. Seansų CRUD (Back and Front)
 4. Bilietų CRUD (Back)(Bet planuoju išmesti bilietų crud ir daryti kitokiu būdu(papasakosiu per paskaitą))
 5. Registracija (Back and Front)
+
+6. Bug fixes in Back
 
 nepilnai padaryta:
 
