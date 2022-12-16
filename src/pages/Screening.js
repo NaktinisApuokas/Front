@@ -1,10 +1,10 @@
-import React from "react"
-import ScreeningList from "../components/ScreeningList";
+import React from 'react';
+import ScreeningList from '../components/ScreeningList';
 
-export default function Screening(){
+export default function Screening() {
   return (
     <div>
-        <ScreeningList/>
+      <ScreeningList />
     </div>
   );
 }

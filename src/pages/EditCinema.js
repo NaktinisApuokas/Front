@@ -1,10 +1,10 @@
-import React from "react";
-import CinemaEditForm from "../components/CinemaEditForm";
+import React from 'react';
+import CinemaEditForm from '../components/CinemaEditForm';
 
-export default function EditCinema(){
+export default function EditCinema() {
   return (
     <div>
-        <CinemaEditForm/>
+      <CinemaEditForm />
     </div>
   );
 }

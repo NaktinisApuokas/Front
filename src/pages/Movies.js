@@ -1,10 +1,10 @@
-import React from "react";
-import MoviesList from "../components/MovieList";
+import React from 'react';
+import MoviesList from '../components/MovieList';
 
-export default function Movies(){
+export default function Movies() {
   return (
     <div>
-        <MoviesList/>
+      <MoviesList />
     </div>
   );
 }

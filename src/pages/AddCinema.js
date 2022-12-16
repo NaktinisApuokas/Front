@@ -1,10 +1,10 @@
-import React from "react";
-import CreateCinemaForm from "../components/CreateCinemaForm";
+import React from 'react';
+import CreateCinemaForm from '../components/CreateCinemaForm';
 
-export default function AddCinema(){
+export default function AddCinema() {
   return (
     <div>
-        <CreateCinemaForm/>
+      <CreateCinemaForm />
     </div>
   );
 }

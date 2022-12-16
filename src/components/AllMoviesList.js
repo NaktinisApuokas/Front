@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react';
 
-export default function AllMoviesList(movies){
-  if(movies.data!=null){
+export default function AllMoviesList(movies) {
+  if (movies.data != null) {
     return (
       <div className="table-resposive mt-5">
         <table className="table table-bordered border-dark">
@@ -12,7 +12,7 @@ export default function AllMoviesList(movies){
             </tr>
           </thead>
           <tbody>
-          {movies.map((movie) => (
+            {movies.map((movie) => (
               <tr key={movie.id}>
                 <td>{movie.name}</td>
                 <td>{movie.address}</td>
@@ -24,8 +24,8 @@ export default function AllMoviesList(movies){
     );
   }
   return (
-    <div className='p-5 text-center bg-light'>
-      <h4 className='mb-3'>No Movies </h4>
+    <div className="p-5 text-center bg-light">
+      <h4 className="mb-3">No Movies </h4>
     </div>
   );
 }

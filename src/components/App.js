@@ -1,42 +1,47 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home";
-import Header from "./header";
-import Login from "../pages/Login";
-import AllMoviesList from "./AllMoviesList";
-import Register from "../pages/Register";
-import Movies from "../pages/Movies";
-import AddMovie from "../pages/AddMovie";
-import AddCinema from "../pages/AddCinema";
-import AddScreening from "../pages/AddScreening";
-import Screening from "../pages/Screening";
-import EditCinema from "../pages/EditCinema";
-import EditMovie from "../pages/EditMovie";
-import EditScreening from "../pages/EditScreening";
+import React, { createContext, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from '../pages/Home';
+import Header from './header';
+import Login from '../pages/Login';
+import AllMoviesList from './AllMoviesList';
+import Register from '../pages/Register';
+import Movies from '../pages/Movies';
+import AddMovie from '../pages/AddMovie';
+import AddCinema from '../pages/AddCinema';
+import AddScreening from '../pages/AddScreening';
+import Screening from '../pages/Screening';
+import EditCinema from '../pages/EditCinema';
+import EditMovie from '../pages/EditMovie';
+import EditScreening from '../pages/EditScreening';
+
+export const AuthContext = createContext();
 
 export default function App() {
+  const [name, setName] = useState();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route index element={<Home />} />
-          <Route path="allmovies" element={<AllMoviesList />} />
+    <AuthContext.Provider value={{ name, setName }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<Home />} />
+            <Route path="allmovies" element={<AllMoviesList />} />
 
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
 
-          <Route path="add_cinema" element={<AddCinema />} />
-          <Route path="edit_cinema" element={<EditCinema />} />
+            <Route path="add_cinema" element={<AddCinema />} />
+            <Route path="edit_cinema" element={<EditCinema />} />
 
-          <Route path="movies" element={<Movies />} />
-          <Route path="add_movie" element={<AddMovie />} />
-          <Route path="edit_movie" element={<EditMovie />} />
+            <Route path="movies" element={<Movies />} />
+            <Route path="add_movie" element={<AddMovie />} />
+            <Route path="edit_movie" element={<EditMovie />} />
 
-          <Route path="screenings" element={<Screening />} />
-          <Route path="add_screening" element={<AddScreening />} />
-          <Route path="edit_screening" element={<EditScreening />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="screenings" element={<Screening />} />
+            <Route path="add_screening" element={<AddScreening />} />
+            <Route path="edit_screening" element={<EditScreening />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 }

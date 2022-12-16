@@ -1,38 +1,32 @@
-
-import React from "react"
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import routes from '../constants/routes';
 import DeleteButton from './DeleteButton';
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import EditButton from "./EditButton";
+import EditButton from './EditButton';
 
-const url = routes + "/cinemas/";
+const url = `${routes}/cinemas/`;
 
-export default function CinemasList(cinemas){
-return (
-  <MDBTable>
-    <MDBTableHead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Address</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </MDBTableHead>
-    <MDBTableBody>
-    {cinemas.map((cinema) => (
-        <tr key={cinema.id}>
-          <td>{cinema.name}</td>
-          <td>{cinema.address}</td>
-          <td><Link style={{ textDecoration: 'none', color: 'Black' }} to="/movies" state={{ type:cinema.id}}> View Movies </Link></td>
-          <td>{EditButton({ type:cinema.id}, "/edit_cinema")}</td>
-          <td>{DeleteButton(cinema.id, url)}</td>
+export default function CinemasList(cinemas) {
+  return (
+    <MDBTable>
+      <MDBTableHead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
         </tr>
-      ))
-    }
-    </MDBTableBody>
-  </MDBTable>
-);
+      </MDBTableHead>
+      <MDBTableBody>
+        {cinemas.map((cinema) => (
+          <tr key={cinema.id}>
+            <td>{cinema.name}</td>
+            <td>{cinema.address}</td>
+            <td><Link style={{ textDecoration: 'none', color: 'Black' }} to="/movies" state={{ type: cinema.id }}> View Movies </Link></td>
+            <td>{EditButton({ type: cinema.id }, '/edit_cinema')}</td>
+            <td>{DeleteButton(cinema.id, url)}</td>
+          </tr>
+        ))}
+      </MDBTableBody>
+    </MDBTable>
+  );
 }
-  

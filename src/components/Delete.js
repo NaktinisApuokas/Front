@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-export default function Delete(id, url){
-    axios.delete(url + id);
-    window.location.reload(false)
-  }
+export default function Delete(id, url) {
+  axios.delete(url + id);
+  window.location.reload(false);
+}

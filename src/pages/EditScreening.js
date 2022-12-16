@@ -1,10 +1,10 @@
-import React from "react";
-import ScreeningEditForm from "../components/ScreeningEditForm";
+import React from 'react';
+import ScreeningEditForm from '../components/ScreeningEditForm';
 
-export default function EditScreening(){
+export default function EditScreening() {
   return (
     <div>
-        <ScreeningEditForm/>
+      <ScreeningEditForm />
     </div>
   );
 }
