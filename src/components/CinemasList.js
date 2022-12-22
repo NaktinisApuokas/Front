@@ -5,8 +5,6 @@ import routes from '../constants/routes';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 
-const url = `${routes}/cinemas/`;
-
 export default function CinemasList(cinemas) {
   return (
     <MDBTable>
@@ -14,6 +12,9 @@ export default function CinemasList(cinemas) {
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Address</th>
+          <th scope="col" />
+          <th scope="col" />
+          <th scope="col" />
         </tr>
       </MDBTableHead>
       <MDBTableBody>
@@ -23,7 +24,7 @@ export default function CinemasList(cinemas) {
             <td>{cinema.address}</td>
             <td><Link style={{ textDecoration: 'none', color: 'Black' }} to="/movies" state={{ type: cinema.id }}> View Movies </Link></td>
             <td>{EditButton({ type: cinema.id }, '/edit_cinema')}</td>
-            <td>{DeleteButton(cinema.id, url)}</td>
+            <td>{DeleteButton(cinema.id, `${routes}/cinemas/`)}</td>
           </tr>
         ))}
       </MDBTableBody>
