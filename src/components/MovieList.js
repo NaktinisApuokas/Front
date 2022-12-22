@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import routes from '../constants/routes';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
+import getData from '../hooks/getData';
 
 export default function MoviesList() {
   const [isLoading, setLoading] = useState(true);
@@ -14,13 +14,10 @@ export default function MoviesList() {
   const deleteUrl = `${url}/`;
 
   useEffect(() => {
-    async function getData(url) {
-      const getData = await axios.get(url);
-      setData(getData.data);
-    }
-    getData(url);
+    setData(getData(url));
     setLoading(false);
   }, [isLoading]);
+
 
   if (isLoading) {
     return <div className="mb-3 p-5 text-center bg-light">Loading...</div>;

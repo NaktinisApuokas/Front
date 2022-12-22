@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '../constants/routes';
 
 export default function CreateMovieForm() {
@@ -47,7 +47,7 @@ export default function CreateMovieForm() {
         <input value={formData.description} name="description" type="text" className="form-control" onChange={handleChange} />
       </div>
 
-      <Link onClick={handleSubmit}><button className="btn btn-dark btn-lg w-100 mt-5">Submit</button></Link>
+      <button className="btn btn-dark btn-lg w-100 mt-5" onClick={handleSubmit}>Submit</button>
     </form>
   );
 }
