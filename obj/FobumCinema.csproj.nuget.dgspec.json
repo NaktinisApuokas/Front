@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj": {}
+    "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\FobumCinema.csproj": {}
   },
   "projects": {
-    "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj": {
+    "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\FobumCinema.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj",
+        "projectUniqueName": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\FobumCinema.csproj",
         "projectName": "FobumCinema",
-        "projectPath": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj",
+        "projectPath": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\FobumCinema.csproj",
         "packagesPath": "C:\\Users\\namek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\obj\\",
+        "outputPath": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\namek\\AppData\\Roaming\\NuGet\\NuGet.Config",

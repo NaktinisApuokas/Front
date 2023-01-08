@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FobumCinema", "PresentConnection\FobumCinema.csproj", "{D36C3557-10BC-45A4-9C47-27A585650EA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FobumCinema", "FobumCinema.csproj", "{55D56459-AC01-4183-80FA-90EBB243CE07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D36C3557-10BC-45A4-9C47-27A585650EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D36C3557-10BC-45A4-9C47-27A585650EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D36C3557-10BC-45A4-9C47-27A585650EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D36C3557-10BC-45A4-9C47-27A585650EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D56459-AC01-4183-80FA-90EBB243CE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D56459-AC01-4183-80FA-90EBB243CE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D56459-AC01-4183-80FA-90EBB243CE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D56459-AC01-4183-80FA-90EBB243CE07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D3DD3157-372D-49D7-A6A7-A17FE8EF03DD}
+		SolutionGuid = {C9A83117-3D6D-42E7-A00D-49118ED38D8C}
 	EndGlobalSection
 EndGlobal
