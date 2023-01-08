@@ -4,7 +4,7 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import routes from '../constants/routes';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
-import getData from '../hooks/getData';
+import axios from 'axios';
 
 export default function MoviesList() {
   const [isLoading, setLoading] = useState(true);
@@ -14,7 +14,11 @@ export default function MoviesList() {
   const deleteUrl = `${url}/`;
 
   useEffect(() => {
-    setData(getData(url));
+    async function getCinemas(url) {
+      const getData = await axios.get(url);
+      setData(getData.data);
+    }
+    getCinemas(url);
     setLoading(false);
   }, [isLoading]);
 
