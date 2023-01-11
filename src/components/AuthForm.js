@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import routes from '../constants/routes';
 import { AuthContext } from '../App';
 
-export default function LoginForm() {
+export default function AuthForm({title}) {
   const [formData, setFormData] = useState([]);
   const navigate = useNavigate();
   const { setName } = useContext(AuthContext);
+
   const handleChange = (Event) => {
     setFormData({
       ...formData,
@@ -18,23 +19,38 @@ export default function LoginForm() {
   const handleSubmit = (Event) => {
     Event.preventDefault();
 
-    const User = {
-      userName: formData.UserName,
-      password: formData.Password,
-    };
-    setName(User.userName);
-    axios.post(`${routes}/login`, { User }).catch((error) => { console.log(error); });
+    if(title === "Login"){
+        const user = {
+            userName: formData.UserName,
+            password: formData.Password,
+        };
+        setName(user.userName);
+        axios.post(`${routes}/login`, user).catch((error) => { console.log(error); });
+    }
+    else{
+        const user = {
+            username: formData.UserName,
+            email: formData.Email,
+            password: formData.Password,
+        };
+        axios.post(`${routes}/register`, user).catch((error) => { console.log(error); });
+    }
     navigate('/');
   };
   return (
     <form className="w-100 px-5">
-      <h1 className="mt-5">Login</h1>
+      <h1 className="mt-5">{title}</h1>
 
       <div className="mt-5">
         <label className="h3 form-label">User name</label>
         <input value={formData.UserName} name="UserName" type="text" className="form-control" onChange={handleChange} />
       </div>
-
+    {title === "Register" &&
+        <div className="mt-4">
+            <label className="h3 form-label">Email</label>
+            <input value={formData.Email} name="Email" type="text" className="form-control" onChange={handleChange} />
+        </div>
+    }
       <div className="mt-4">
         <label className="h3 form-label">Password</label>
         <input value={formData.Password} name="Password" type="text" className="form-control" onChange={handleChange} />

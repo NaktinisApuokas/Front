@@ -1,10 +1,10 @@
 import React from 'react';
-import ScreeningEditForm from '../components/ScreeningEditForm';
+import ScreeningForm from '../components/ScreeningForm';
 
 export default function EditScreening() {
   return (
     <div>
-      <ScreeningEditForm />
+      <ScreeningForm title={"Edit"} />
     </div>
   );
 }

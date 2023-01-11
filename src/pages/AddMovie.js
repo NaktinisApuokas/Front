@@ -1,10 +1,10 @@
 import React from 'react';
-import CreateMovieForm from '../components/CreateMovieForm';
+import MovieForm from '../components/MovieForm';
 
 export default function AddMovie() {
   return (
     <div>
-      <CreateMovieForm />
+      <MovieForm title={"Create"}/>
     </div>
   );
 }

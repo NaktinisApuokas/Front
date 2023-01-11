@@ -1,35 +1,37 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '../constants/routes';
 
-export default function CreateCinemaForm() {
+export default function CinemaForm({title}) {
   const [formData, setFormData] = useState([]);
-
   const navigate = useNavigate();
 
-  const handleChange = (Event) => {
+  const handleChange = (event) => {
     setFormData({
       ...formData,
-      [Event.target.name]: Event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = (Event) => {
-    Event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const postToCreate = {
+    const cinema = {
       name: formData.name,
       address: formData.address,
     };
-
-    axios.post(`${routes}/cinemas`, postToCreate).catch((error) => { console.log(error); });
+    if(title === "Edit"){
+        const id = useLocation().state.type;
+        axios.put(`${routes}/cinemas/${id}`, cinema).catch((error) => { console.log(error); });
+    }
+    axios.post(`${routes}/cinemas`, cinema).catch((error) => { console.log(error); });
     navigate('/');
   };
 
   return (
     <form className="w-100 px-5">
-      <h1 className="mt-5">Create new Cinema</h1>
+      <h1 className="mt-5">{title} Cinema</h1>
 
       <div className="mt-5">
         <label className="h3 form-label">Cinema name</label>
@@ -41,7 +43,7 @@ export default function CreateCinemaForm() {
         <input value={formData.address} name="address" type="text" className="form-control" onChange={handleChange} />
       </div>
 
-        <button className="btn btn-dark btn-lg w-100 mt-5" onClick={handleSubmit}>Submit</button>
+      <button className="btn btn-dark btn-lg w-100 mt-5" onClick={handleSubmit}>Submit</button>
     </form>
   );
 }

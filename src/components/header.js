@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Outlet, Link } from 'react-router-dom';
-import { AuthContext } from './App';
+import { AuthContext } from '../App';
+
 
 export default function header() {
   const { name } = useContext(AuthContext);
@@ -17,7 +18,7 @@ export default function header() {
                 <Link to="/">Home</Link>
               </div>
               <div style={{ margin: '10px' }}>
-                <Link to="/movies">Movies</Link>
+                <Link to="/allmovies">Movies</Link>
               </div>
               <div style={{ margin: '10px' }}>
                 <Link to="/login">Login</Link>
@@ -28,7 +29,6 @@ export default function header() {
               {name && (
               <Nav.Link>
                 Logged in as:
-                {' '}
                 {name}
               </Nav.Link>
               )}

@@ -3,40 +3,47 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '../constants/routes';
 
-export default function CreateScreeningForm() {
+export default function ScreeningForm({title}) {
+
   const [formData, setFormData] = useState([]);
-  const moviesid = useLocation().state.movieid;
+  const { movieid } = useLocation().state;
   const id = useLocation().state.type;
   const navigate = useNavigate();
 
-  const handleChange = (Event) => {
+  const handleChange = (event) => {
     setFormData({
       ...formData,
-      [Event.target.name]: Event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = (Event) => {
-    Event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const postToCreate = {
+    const screening = {
       hall: formData.hall,
       price: formData.price,
       seatnumber: formData.seatnumber,
     };
 
-    axios.post(`${routes}/cinemas/${id}/movies/${moviesid}/screening`, postToCreate).catch((error) => { console.log(error); });
+    if(title === "Edit"){
+      const { screeningid } = useLocation().state;
+      axios.put(`${routes}/cinemas/${id}/movies/${movieid}/screening/${screeningid}`, screening).catch((error) => { console.log(error); });
+    }
+    else{
+      axios.post(`${routes}/cinemas/${id}/movies/${movieid}/screening`, screening).catch((error) => { console.log(error); });
+    }
     navigate('/screenings', {
       state: {
         type: id,
-        movieid: moviesid,
+        movieid
       },
     });
   };
 
   return (
     <form className="w-100 px-5">
-      <h1 className="mt-5">Add Screening</h1>
+      <h1 className="mt-5">{title} Screening</h1>
 
       <div className="mt-5">
         <label className="h3 form-label">Screening Hall</label>
@@ -53,7 +60,7 @@ export default function CreateScreeningForm() {
         <input value={formData.seatnumber} name="seatnumber" type="text" className="form-control" onChange={handleChange} />
       </div>
 
-      <button className="btn btn-dark btn-lg w-100 mt-5" onClick={handleSubmit}>Submit</button>
+        <button className="btn btn-dark btn-lg w-100 mt-5"  onClick={handleSubmit}>Submit</button>
     </form>
   );
 }

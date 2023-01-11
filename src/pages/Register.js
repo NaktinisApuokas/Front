@@ -1,10 +1,10 @@
 import React from 'react';
-import RegisterForm from '../components/RegisterForm';
+import AuthForm from '../components/AuthForm';
 
 export default function Register() {
   return (
     <div>
-      <RegisterForm />
+      <AuthForm title={"Register"}/>
     </div>
   );
 }

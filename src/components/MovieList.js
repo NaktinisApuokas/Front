@@ -1,37 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import {Link} from 'react-router-dom';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import routes from '../constants/routes';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
-import axios from 'axios';
+import withLoading from '../HOCs/withLoading';
 
-export default function MoviesList() {
-  const [isLoading, setLoading] = useState(true);
-  const [movies, setData] = useState([]);
-  const id = useLocation().state.type;
-  const url = `${routes}/cinemas/${id}/movies`;
+function MoviesList({movies, url, id}) {
   const deleteUrl = `${url}/`;
-
-  useEffect(() => {
-    async function getCinemas(url) {
-      const getData = await axios.get(url);
-      setData(getData.data);
-    }
-    getCinemas(url);
-    setLoading(false);
-  }, [isLoading]);
-
-
-  if (isLoading) {
-    return <div className="mb-3 p-5 text-center bg-light">Loading...</div>;
-  }
-
-  if (movies.length > 0) {
-    return (
-      <div className="p-5 text-center bg-light">
-        {' '}
-        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-dark btn-lg w-40"> Add Movie </button></Link>
+  return (
+    <div className="p-5 text-center bg-light">
+      <h1 className="mb-3"> Movies List</h1>
+      <Link to="/add_movie" state={{ type: id }}><button className="btn btn-dark btn-lg w-40"> Add Movie </button></Link>
+      {movies.length === 0 ?  <div className="mb-3 p-5 text-center bg-light"> No Movies</div>
+        :
         <MDBTable>
           <MDBTableHead>
             <tr>
@@ -48,22 +29,15 @@ export default function MoviesList() {
                 <td>{movie.title}</td>
                 <td>{movie.genre}</td>
                 <td><Link to="/screenings" style={{ textDecoration: 'none', color: 'Black' }} state={{ type: id, movieid: movie.id }}> View Screening </Link></td>
-                <td>{EditButton({ type: id, movie }, '/edit_movie')}</td>
-                <td>{DeleteButton(movie.id, deleteUrl)}</td>
+                <td><EditButton linkstate={{id, movie}} url={'/edit_movie'}/></td>
+                <td><DeleteButton url={deleteUrl + movie.id}/></td>
               </tr>
             ))}
           </MDBTableBody>
         </MDBTable>
-      </div>
-    );
-  }
-  return (
-    <div className="mb-3 p-5 text-center bg-light">
-      {' '}
-      No movies
-      <div className="mt-5">
-        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-dark btn-lg w-40"> Add Movie </button></Link>
-      </div>
+      }
     </div>
   );
 }
+
+export default withLoading(MoviesList);

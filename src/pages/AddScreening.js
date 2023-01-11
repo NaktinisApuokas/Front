@@ -1,10 +1,10 @@
 import React from 'react';
-import CreateScreeningForm from '../components/CreateScreeningForm';
+import ScreeningForm from '../components/ScreeningForm';
 
 export default function AddScreening() {
   return (
     <div>
-      <CreateScreeningForm />
+      <ScreeningForm title={"Create"} />
     </div>
   );
 }

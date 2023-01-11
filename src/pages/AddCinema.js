@@ -1,10 +1,10 @@
 import React from 'react';
-import CreateCinemaForm from '../components/CreateCinemaForm';
+import CinemaForm from '../components/CinemaForm';
 
 export default function AddCinema() {
   return (
     <div>
-      <CreateCinemaForm />
+      <CinemaForm title={"Create"}/>
     </div>
   );
 }
