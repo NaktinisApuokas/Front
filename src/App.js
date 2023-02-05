@@ -13,6 +13,7 @@ import EditCinema from './pages/EditCinema';
 import EditMovie from './pages/EditMovie';
 import EditScreening from './pages/EditScreening';
 import AllMovies from './pages/AllMovies';
+import './css/styles.css';
 
 export const AuthContext = createContext();
 

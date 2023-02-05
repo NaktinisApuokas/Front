@@ -7,25 +7,25 @@ import { AuthContext } from '../App';
 export default function AuthForm({title}) {
   const [formData, setFormData] = useState([]);
   const navigate = useNavigate();
-  const { setName } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
 
-  const handleChange = (Event) => {
+  const handleChange = (event) => {
     setFormData({
       ...formData,
-      [Event.target.name]: Event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = (Event) => {
-    Event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     if(title === "Login"){
         const user = {
             userName: formData.UserName,
             password: formData.Password,
         };
-        setName(user.userName);
-        axios.post(`${routes}/login`, user).catch((error) => { console.log(error); });
+        const response = axios.post(`${routes}/login`, user).catch((error) => { console.log(error); });
+        setToken(response);
     }
     else{
         const user = {

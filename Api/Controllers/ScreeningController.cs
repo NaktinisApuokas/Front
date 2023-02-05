@@ -3,11 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FobumCinema.Data.Dtos.Screening;
-using FobumCinema.Data.Entities;
+using FobumCinema.Domain.Entities;
 using FobumCinema.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Infrastructure.Repositories;
 
-namespace FobumCinema.Controllers
+namespace FobumCinema.Api.Controllers
 {
     [ApiController]
     [Route("api/cinemas/{CinemaId}/movies/{MovieId}/screening")]

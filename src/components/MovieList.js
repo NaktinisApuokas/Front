@@ -28,7 +28,7 @@ function MoviesList({movies, url, id}) {
               <tr key={movie.id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre}</td>
-                <td><Link to="/screenings" style={{ textDecoration: 'none', color: 'Black' }} state={{ type: id, movieid: movie.id }}> View Screening </Link></td>
+                <td><Link className='text-link' to="/screenings" state={{ type: id, movieid: movie.id }}> View Screening </Link></td>
                 <td><EditButton linkstate={{id, movie}} url={'/edit_movie'}/></td>
                 <td><DeleteButton url={deleteUrl + movie.id}/></td>
               </tr>

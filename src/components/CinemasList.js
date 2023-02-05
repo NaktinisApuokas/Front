@@ -26,10 +26,9 @@ function CinemasList({cinemas}) {
               <tr key={cinema.id}>
                 <td>{cinema.name}</td>
                 <td>{cinema.address}</td>
-                <td><Link style={{ textDecoration: 'none', color: 'Black' }} to="/movies" state={{ type: cinema.id }}> View Movies </Link></td>
-                <td>{EditButton(cinema.id, '/edit_cinema')}</td>
-                <td>{DeleteButton(`${routes}/cinemas/${cinema.id}/`)}</td>
-                
+                <td><Link className='text-link' to="/movies" state={{ type: cinema.id }}> View Movies </Link></td>
+                <td><EditButton linkstate={cinema.id } url={'/edit_cinema'}/></td>
+                <td><DeleteButton url={`${routes}/cinemas/${cinema.id}/`}/></td>
               </tr>
             ))}
           </MDBTableBody>
@@ -38,6 +37,6 @@ function CinemasList({cinemas}) {
     </div>
   );
 }
- //<td><EditButton linkstate={cinema.id } url={'/edit_cinema'}/></td>
+//<td>{DeleteButton(`${routes}/cinemas/${cinema.id}/`)}</td> style={{ textDecoration: 'none', color: 'Black' }}
  //<td><DeleteButton url={`${routes}/cinemas/${cinema.id}/`}/></td>
 export default withLoading(CinemasList);

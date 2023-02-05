@@ -5,21 +5,20 @@ import routes from '../constants/routes';
 
 export default function MovieForm({title}) {
   const id = useLocation().state.type;
-  console.log(useLocation().state)
   const { movie } = useLocation().state;
   const [formData, setFormData] = useState([]);
 
   const navigate = useNavigate();
 
-  const handleChange = (Event) => {
+  const handleChange = (event) => {
     setFormData({
       ...formData,
-      [Event.target.name]: Event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = (Event) => {
-    Event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     if(title === "Edit"){
       const movietoedit = {

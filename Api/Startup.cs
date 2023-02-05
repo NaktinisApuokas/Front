@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using FobumCinema.Data.Dtos.Auth;
 using FobumCinema.Infrastructure;
+using Infrastructure.Repositories;
 
 namespace FobumCinema.Api
 {

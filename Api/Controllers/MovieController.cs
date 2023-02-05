@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FobumCinema.Data.Dtos.Movie;
-using FobumCinema.Data.Entities;
 using FobumCinema.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
