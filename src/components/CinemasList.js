@@ -1,42 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import routes from '../constants/routes';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
+import { Card, Grid } from '@mui/material';
+import styles from '../css/styles.module.css';
 
 function CinemasList({cinemas}) {
   return (
-    <div>
-      {cinemas.length === 0 ?  <div className="mb-3 p-5 text-center bg-light"> No Movies</div>
+    <div className="p-5 text-center bg-dark">
+      {cinemas.length === 0 ?  <div className="mb-3 p-5 text-center bg-light"> No Cinemas</div>
         :
-        <MDBTable>
-          <MDBTableHead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Address</th>
-              <th scope="col" />
-              <th scope="col" />
-              <th scope="col" />
-            </tr>
-          </MDBTableHead>
-          <MDBTableBody>
-            {cinemas.map(cinema => (
-              <tr key={cinema.id}>
-                <td>{cinema.name}</td>
-                <td>{cinema.address}</td>
-                <td><Link className='text-link' to="/movies" state={{ type: cinema.id }}> View Movies </Link></td>
-                <td><EditButton linkstate={cinema.id } url={'/edit_cinema'}/></td>
-                <td><DeleteButton url={`${routes}/cinemas/${cinema.id}/`}/></td>
-              </tr>
-            ))}
-          </MDBTableBody>
-        </MDBTable>
+        cinemas.map(cinema => (
+          <Link key={cinema.id} className={styles.Link} to="/movies" state={{ type: cinema.id }}>
+            <Card className={styles.Card}>
+              <Grid container spacing={0}>
+                <Grid item xs={3}>
+                  <img className={styles.Photo} alt={cinema.img} src={cinema.img}/>
+                </Grid>
+                <Grid item xs={4} className={styles.Text}>
+                  <span className={styles.Text}><b>Kino Teatras: </b>{cinema.name}</span><br/>
+                  <span className={styles.Text}><b>Adresas: </b>{cinema.address}</span>
+                </Grid>
+                <Grid item xs={3} className={styles.ButtonCard}>
+                  <div className="d-grid gap-3">
+                    <EditButton linkstate={cinema.id } url={'/edit_cinema'}/>
+                    <DeleteButton url={`${routes}/cinemas/${cinema.id}/`}/>
+                  </div>
+                </Grid>
+              </Grid>  
+            </Card>
+          </Link>
+        ))  
       }
     </div>
   );
 }
-//<td>{DeleteButton(`${routes}/cinemas/${cinema.id}/`)}</td> style={{ textDecoration: 'none', color: 'Black' }}
- //<td><DeleteButton url={`${routes}/cinemas/${cinema.id}/`}/></td>
 export default withLoading(CinemasList);

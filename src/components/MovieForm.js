@@ -30,6 +30,8 @@ export default function MovieForm({title}) {
       const movietocreate = {
         title: formData.title,
         genre: formData.genre,
+        img: formData.img,
+        duration: formData.duration,
         description: formData.description
       };
       axios.post(`${routes}/cinemas/${id}/movies`, movietocreate).catch((error) => { console.log(error); });
@@ -53,6 +55,14 @@ export default function MovieForm({title}) {
           <div className="mt-4">
             <label className="h3 form-label">Movie genre</label>
             <input value={formData.genre} name="genre" type="text" className="form-control" onChange={handleChange} />
+          </div>
+          <div className="mt-4">
+            <label className="h3 form-label">Movie img</label>
+            <input value={formData.img} name="img" type="text" className="form-control" onChange={handleChange} />
+          </div>
+          <div className="mt-4">
+            <label className="h3 form-label">Movie duration</label>
+            <input value={formData.duration} name="duration" type="text" className="form-control" onChange={handleChange} />
           </div>
         </div>
       }

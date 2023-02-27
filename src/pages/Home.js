@@ -10,10 +10,10 @@ export default function Home() {
   const { data:Cinemas, isLoading } = useQuery(url);
 
   return (
-    <div className="p-5 text-center bg-light">
-      <h1 className="mb-3"> Cinemas List</h1>
+    <div className="p-5 text-center bg-dark">
+      <h1 className="mb-3 text-light"> Cinemas List</h1>
       <div className="mt-5">
-        <Link to="/add_cinema"><button className="btn btn-dark btn-lg w-40"> Add Cinema </button></Link>
+        <Link to="/add_cinema"><button className="btn btn-light btn-lg w-40"> Add Cinema </button></Link>
       </div>
       <CinemasList cinemas={Cinemas} isLoading={isLoading}/>
     </div>
