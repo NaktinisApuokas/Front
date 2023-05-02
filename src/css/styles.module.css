@@ -47,3 +47,19 @@
     align-items: center;
     justify-content: right;
 }
+.BackGround {
+    height: 100em;
+    padding: 5rem;
+    min-height : '100vh';
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+    background-color: DarkSlateGray;
+}
+.InnerBackGround {
+    padding: 5rem;
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+    background-color: DarkSlateGray;
+}

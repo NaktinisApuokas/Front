@@ -4,32 +4,38 @@ import routes from '../constants/routes';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
-import { Card, Grid } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import styles from '../css/styles.module.css';
+import { ButtonGroup } from 'react-bootstrap';
 
 function CinemasList({cinemas}) {
   return (
-    <div className="p-5 text-center bg-dark">
-      {cinemas.length === 0 ?  <div className="mb-3 p-5 text-center bg-light"> No Cinemas</div>
+    <div className={styles.InnerBackGround}>
+      {cinemas.length === 0 ?  <div className={styles.InnerBackGround}> No Cinemas</div>
         :
         cinemas.map(cinema => (
           <Link key={cinema.id} className={styles.Link} to="/movies" state={{ type: cinema.id }}>
-            <Card className={styles.Card}>
-              <Grid container spacing={0}>
-                <Grid item xs={3}>
-                  <img className={styles.Photo} alt={cinema.img} src={cinema.img}/>
-                </Grid>
-                <Grid item xs={4} className={styles.Text}>
-                  <span className={styles.Text}><b>Kino Teatras: </b>{cinema.name}</span><br/>
-                  <span className={styles.Text}><b>Adresas: </b>{cinema.address}</span>
-                </Grid>
-                <Grid item xs={3} className={styles.ButtonCard}>
-                  <div className="d-grid gap-3">
+            <Card sx={{ display: 'flex', marginTop: 4}}>
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                <CardMedia
+                  className={styles.Photo}
+                  image={cinema.img}
+                />
+                <CardContent sx={{ flex: '1 0 auto' }}>
+                  <Typography component="div" variant="h5">
+                    Kino Teatras: {cinema.name}
+                  </Typography>
+                  <Typography variant="subtitle1" color="text.secondary" component="div">
+                    Adresas: {cinema.address}
+                  </Typography>
+                </CardContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2}}>
+                  <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <EditButton linkstate={cinema.id } url={'/edit_cinema'}/>
                     <DeleteButton url={`${routes}/cinemas/${cinema.id}/`}/>
-                  </div>
-                </Grid>
-              </Grid>  
+                  </ButtonGroup>
+                </Box>
+              </Box>
             </Card>
           </Link>
         ))  

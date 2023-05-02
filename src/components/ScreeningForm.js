@@ -12,7 +12,6 @@ export default function ScreeningForm({title}) {
   const id = useLocation().state.type;
   const navigate = useNavigate();
   const location = useLocation().state;
-  console.log("form ; ", location);
   const handleChange = (event) => {
     setFormData({
       ...formData,

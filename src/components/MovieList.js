@@ -9,10 +9,10 @@ import { Grid, Card, Typography } from '@mui/material';
 function MoviesList({movies, url, id}) {
   const deleteUrl = `${url}/`;
   return (
-    <div className="p-5 text-center bg-dark">
+    <div className={styles.InnerBackGround}>
       <h1 className="mb-3 text-light"> Movies List</h1>
       <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Add Movie </button></Link>
-      {movies.length === 0 ?  <div className="mb-3 p-5 text-center bg-light"> No Movies</div>
+      {movies.length === 0 ?  <div className={styles.InnerBackGround}> No Movies</div>
         :
         movies.map((movie) => (
           <Link className={styles.Link} key={movie.id} to="/screenings" state={{ type: id, movieid: movie.id }}>
