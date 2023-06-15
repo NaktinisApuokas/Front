@@ -7,7 +7,7 @@ import { AuthContext } from '../App';
 export default function AuthForm({title}) {
   const [formData, setFormData] = useState([]);
   const navigate = useNavigate();
-  const { setToken } = useContext(AuthContext);
+  const { setRole } = useContext(AuthContext);
 
   const handleChange = (event) => {
     setFormData({
@@ -24,8 +24,11 @@ export default function AuthForm({title}) {
             userName: formData.UserName,
             password: formData.Password,
         };
-        const response = axios.post(`${routes}/login`, user).catch((error) => { console.log(error); });
-        setToken(response);
+        axios.post(`${routes}/login`, user)
+        .then(x => {
+          setRole(formData.UserName);
+        })
+        .catch((error) => { console.log(error); });
     }
     else{
         const user = {

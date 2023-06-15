@@ -1,47 +1,56 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Link} from 'react-router-dom';
-import DeleteButton from './DeleteButton';
-import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
-import styles from '../css/styles.module.css';
-import { Grid, Card, Typography } from '@mui/material';
+import styles from './MovieList.module.css';
+import { Card, Typography, Box, CardContent, CardMedia } from '@mui/material';
+import MovieEditButton from './MovieEditButton';
+import MovieDeleteButton from './MovieDeleteButton';
+import { AuthContext } from '../App';
+import image from "../css/background.jpg"; 
 
 function MoviesList({movies, url, id}) {
+  const { role } = useContext(AuthContext);
   const deleteUrl = `${url}/`;
   return (
-    <div className={styles.InnerBackGround}>
-      <h1 className="mb-3 text-light"> Movies List</h1>
-      <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Add Movie </button></Link>
-      {movies.length === 0 ?  <div className={styles.InnerBackGround}> No Movies</div>
+    <div className={styles.BackGround} style={{ backgroundImage:`url(${image})` }}>
+      {(role === 'admin') && (
+      <div>
+        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Add Movie </button></Link>
+      </div>
+      )}
+      {movies.length === 0 ?  <div className={styles.InnerBackGround} ><button className="btn btn-light text-dark btn-lg w-40"> No Movies </button></div>
         :
         movies.map((movie) => (
           <Link className={styles.Link} key={movie.id} to="/screenings" state={{ type: id, movieid: movie.id }}>
-            <Grid container spacing={2}>
-              <Grid item xs={9}>
-                <Card className={styles.Card} key={movie.id} >
-                  <Grid container spacing={0.5}>
-                    <Grid item xs={2}>
-                      <img className={styles.Img} alt={movie.img} src={movie.img}/>
-                    </Grid>
-                    <Grid item xs={7} >
-                      <Typography variant="h5" className={styles.Typography}>
-                        {movie.title}
-                      </Typography>
-                      <span className={styles.Img}><b>Žandras: </b>{movie.genre}</span>
-                      <span className={styles.Img}><b>Trukmė: </b>{movie.duration}</span>
-                    </Grid>
-                  </Grid>
-                </Card>
-              </Grid>
-              <Grid item xs={3}>
-                <Card className={styles.ButtonCard} key={movie.id} >
-                  <div className="d-grid gap-3">
-                    <EditButton linkstate={{id, movie}} url={'/edit_movie'}/>
-                    <DeleteButton url={deleteUrl + movie.id}/>
-                  </div>
-                </Card>
-              </Grid>
-            </Grid>
+            <Card className={styles.Card}>
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                <CardMedia
+                  className={styles.Photo}
+                  image={movie.img}
+                />
+                <CardContent sx={{ flex: '1 0 auto' }}>
+                <Typography component="div" variant="h3" className={styles.MovieTitle}>
+                {movie.title}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+                  <b>Žandras: </b>{movie.genre}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+                <b>Trukmė: </b>{movie.duration}
+                </Typography>
+                </CardContent>
+                {(role === 'admin') && (
+                  <>
+                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2}}>
+                      <MovieEditButton linkstate={{id, movie}} url={'/edit_movie'}/>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2}}>
+                      <MovieDeleteButton url={deleteUrl + movie.id}/>
+                    </Box>
+                  </>
+                )}
+              </Box>
+            </Card>
           </Link>
         ))
       }

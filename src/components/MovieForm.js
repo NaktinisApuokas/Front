@@ -8,6 +8,7 @@ export default function MovieForm({title}) {
   const { movie } = useLocation().state;
   const [formData, setFormData] = useState([]);
 
+  console.log(id);
   const navigate = useNavigate();
 
   const handleChange = (event) => {

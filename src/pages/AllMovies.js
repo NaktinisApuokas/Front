@@ -5,7 +5,7 @@ import useQuery from '../hooks/useQuery';
 
 export default function AllMovies() {
   const id = 0;
-  const url = `${routes}/allmovies`;
+  const url = `${routes}/all_movies`;
   const { data:movies, isLoading } = useQuery(url);
   return (
     <div>

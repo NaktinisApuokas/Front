@@ -9,6 +9,7 @@ export default function CinemaForm({title}) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(id);
   useEffect(() => {
     if(location.state !== null){
       setId(location.state);

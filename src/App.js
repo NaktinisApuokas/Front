@@ -18,9 +18,9 @@ import './css/styles.module.css';
 export const AuthContext = createContext();
 
 export default function App() {
-  const [name, setName] = useState();
+  const [role, setRole] = useState('admin');
   return (
-    <AuthContext.Provider value={{ name, setName }}>
+    <AuthContext.Provider value={{ role, setRole }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Header />}>
