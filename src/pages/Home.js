@@ -6,7 +6,6 @@ import useQuery from '../hooks/useQuery';
 import styles from '../css/styles.module.css';
 import { Box } from '@mui/material';
 import { AuthContext } from '../App';
-import image from "../css/background.jpg"; 
 
 export default function Home() {
   const { role } = useContext(AuthContext);
@@ -14,7 +13,7 @@ export default function Home() {
   const { data:Cinemas, isLoading } = useQuery(url);
 
   return (
-    <Box className={styles.BackGround} style={{ backgroundImage:`url(${image})` }}>
+    <Box className={styles.BackGround}>
       {(role === 'admin') && (
       <div className="mt-5">
         <Link to="/add_cinema"><button className="btn btn-light btn-lg w-40"> Add Cinema </button></Link>

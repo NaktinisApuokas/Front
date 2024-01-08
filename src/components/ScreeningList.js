@@ -6,14 +6,13 @@ import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import styles from './ScreeningList.module.css';
-import image from "../css/background.jpg"; 
 import { AuthContext } from '../App';
 
 function ScreeningList({screenings, url, id, movieid, movie}) {
   const { role } = useContext(AuthContext);
 
   return (
-    <div className={styles.InnerBackGround} style={{ backgroundImage:`url(${image})` }}>
+    <div className={styles.InnerBackGround}>
       <Card className={styles.Card}>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <CardMedia
@@ -49,9 +48,16 @@ function ScreeningList({screenings, url, id, movieid, movie}) {
         <MDBTable className={styles.Table}>
           <MDBTableHead>
             <tr>
-              <th scope="col">Time</th>
-              <th scope="col">Price</th>
-              <th scope="col">Empty Seat Number</th>
+              <th scope="col">Laikas</th>
+              <th scope="col">Kaina</th>
+              <th scope="col">
+                <Typography variant="subtitle2">
+                  Tikrinta prieš 1h
+                </Typography>
+                <Typography variant="subtitle1">
+                  Laisvų vietų skaičius
+                </Typography>
+              </th>
               <th scope="col" />
               {(role === 'admin') && (
                 <>
@@ -81,7 +87,7 @@ function ScreeningList({screenings, url, id, movieid, movie}) {
                   </Typography>
                 </td>
                 <td>
-                  <a href={screening.url} target="_blank">
+                  <a href={screening.url} target="_blank" rel="noreferrer">
                     <button className="btn btn-dark btn-lg w-40">
                       Buy Tickets
                     </button>

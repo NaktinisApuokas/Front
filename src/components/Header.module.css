@@ -11,6 +11,15 @@
     margin-right: 0.5em;
 }
 
+.BackgroundColor {
+    background-color: #660C0C;
+}
+
+.HeaderText {
+    background-color: white;
+}
+
+
 .DeleteButton{
     height: 7em;
     width: 7em;

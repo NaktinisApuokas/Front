@@ -18,7 +18,7 @@ import './css/styles.module.css';
 export const AuthContext = createContext();
 
 export default function App() {
-  const [role, setRole] = useState('admin');
+  const [role, setRole] = useState('');
   return (
     <AuthContext.Provider value={{ role, setRole }}>
       <BrowserRouter>

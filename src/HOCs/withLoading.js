@@ -1,9 +1,10 @@
 import React from "react";
+import styles from '../css/styles.module.css';
 
 export default function withLoading(Component) {
     return function WithLoadingComponent(props) {
         if(props.isLoading){
-            return <div className="mb-3 p-5 text-center bg-light">Loading...</div>;
+            return <div className={styles.BackGroundColor}>Loading...</div>;
         }
 
         return <Component {...props} />;

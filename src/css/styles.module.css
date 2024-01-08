@@ -69,7 +69,17 @@
 }
 
 .BackGround {
+    background-color: #34454c;
     height: 80em;
+    padding: 5rem;
+    min-height : '100vh';
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+}
+
+.BackGroundColor {
+    background-color: #34454c;
     padding: 5rem;
     min-height : '100vh';
     align-items: top;

@@ -1,7 +1,7 @@
 import React from 'react';
-import MoviesList from '../components/MovieList';
 import routes from '../constants/routes';
 import useQuery from '../hooks/useQuery';
+import AllMoviesList from '../components/AllMoviesList';
 
 export default function AllMovies() {
   const id = 0;
@@ -9,7 +9,7 @@ export default function AllMovies() {
   const { data:movies, isLoading } = useQuery(url);
   return (
     <div>
-      <MoviesList movies={movies} url={url} id={id} isLoading={isLoading}/>
+      <AllMoviesList movies={movies} url={url} id={id} isLoading={isLoading}/>
     </div>
   );
 }
