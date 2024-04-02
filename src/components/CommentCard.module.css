@@ -1,0 +1,51 @@
+.AddComment {
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.comment {
+  display: flex;
+  align-items: left;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #f0f2f5;
+  margin-bottom: 1em;
+}
+
+.avatarSection {
+margin-right: 10px;
+}
+
+.avatar {
+width: 40px;
+height: 40px;
+}
+
+.textSection {
+flex: 1;
+text-align: left;
+}
+
+.username {
+font-weight: bold;
+margin-bottom: 4px;
+}
+
+.commentText {
+line-height: 1.4;
+}
+
+.commentTotalScore {
+  font-weight: bold;
+}
+
+.scoreAndActions {
+  display: flex;
+  align-items: center; 
+  margin-left: auto; 
+}
+
+.voteSection {
+  display: flex;
+  flex-direction: row; 
+}

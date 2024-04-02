@@ -24,8 +24,6 @@ import { styled } from '@mui/material/styles';
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
 import SpeakerNotesRoundedIcon from '@mui/icons-material/SpeakerNotesRounded';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import HeartBrokenOutlinedIcon from '@mui/icons-material/HeartBrokenOutlined';
-import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 
 function MoviesList({movies, url, id}) {
   const [selectedCategory, setSelectedCategory] = useState("Visi");
@@ -34,7 +32,6 @@ function MoviesList({movies, url, id}) {
   const [selectedPrice, setSelectedPrice] = useState();
   const [open, setOpen] = useState({});
   const [favorite, setFavorite] = useState({});
-  const [unfavorite, setUnFavorite] = useState({});
   const { role } = useContext(AuthContext);
   const deleteUrl = `${url}/`;
 
@@ -70,9 +67,6 @@ function MoviesList({movies, url, id}) {
 
   const handleFavoriteClick = (id) => {
     setFavorite((prevState) => ({ ...prevState, [id]: !prevState[id] }));
-  };
-  const handleUnFavoriteClick = (id) => {
-    setUnFavorite((prevState) => ({ ...prevState, [id]: !prevState[id] }));
   };
 
   useEffect(() => {
@@ -163,7 +157,7 @@ function MoviesList({movies, url, id}) {
           </Select>
         </FormControl>
       </Box>
-      {movies.length === 0 ?  <div className={styles.BackGround} ><button className="btn btn-light text-dark btn-lg w-40"> Nėra filmų </button></div>
+      {movies.length === 0 ?  <div className={styles.FullBackGround} ><button className="btn btn-light text-dark btn-lg w-40"> Nėra filmų </button></div>
         :
         arrayToFilter.map((movie) => (
         <Card className={styles.Card}>
@@ -202,17 +196,13 @@ function MoviesList({movies, url, id}) {
                 </CardContent>
                 <CardActions sx={{ flex: '0 1 auto' }} className={styles.CardActions}>
                 <IconButton aria-label="add to favorites">
-                {favorite[movie.id]
-                ?  <FavoriteIcon onClick={() => handleFavoriteClick(movie.id)}/>
-                : <FavoriteBorderIcon onClick={() => handleFavoriteClick(movie.id)}/>
-                }
+                {typeof role !== 'undefined' && role !== '' && (
+                  favorite[movie.id]
+                    ? <FavoriteIcon onClick={() => handleFavoriteClick(movie.id)} />
+                    : <FavoriteBorderIcon onClick={() => handleFavoriteClick(movie.id)} />
+                )}
                 </IconButton>
-                <IconButton aria-label="add to unfavorites">
-                {unfavorite[movie.id]
-                ?  <HeartBrokenIcon onClick={() => handleUnFavoriteClick(movie.id)}/>
-                : <HeartBrokenOutlinedIcon onClick={() => handleUnFavoriteClick(movie.id)}/>
-                }
-                </IconButton>
+               
                 <IconButton aria-label="share">
                   <SpeakerNotesRoundedIcon />
                 </IconButton>

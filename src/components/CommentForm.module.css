@@ -1,0 +1,24 @@
+.TextField{
+    width: 40em;
+}
+.EmojiSelector{
+    display: flex;
+}
+
+.EmojiSelectorEnter {
+    transform: translateY(100%);
+    transition: transform 1.5s ease-out;
+  }
+  
+  .EmojiSelectorEnterActive {
+    transform: translateY(0%);
+  }
+  
+  .EmojiSelectorExit {
+    transform: translateY(0%);
+    transition: transform 1.5s ease-in;
+  }
+  
+  .EmojiSelectorExitActive {
+    transform: translateY(100%);
+  }

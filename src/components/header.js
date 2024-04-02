@@ -19,7 +19,7 @@ export default function header() {
 
   return (
     <Box>
-      <Navbar expand="md">
+      <Navbar expand="md" >
         <Container>
           <Navbar.Brand href="/">
             <Typography variant="h2">

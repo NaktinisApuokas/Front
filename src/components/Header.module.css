@@ -18,7 +18,10 @@
 .HeaderText {
     background-color: white;
 }
-
+Header{
+    display: flex;
+    height: 15vh;
+}
 
 .DeleteButton{
     height: 7em;

@@ -170,6 +170,19 @@
     justify-content: center;
 }
 
+.FullBackGround {
+    background-color: #34454c;
+    padding: 5rem;
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+}
+
+.BackGroundColor2 {
+    background-color: #34454c;
+}
+
+
 .BrighterBackGround {
     background-color: #d6dadb;
     padding: 5rem;

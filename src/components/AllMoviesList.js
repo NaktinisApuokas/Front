@@ -196,23 +196,23 @@ useEffect(() => {
                 {movie.cinema.name}
                 </Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                  {movie.screenings.map((screening) => (
+                  {/* {movie.screenings.map((screening) => (
                     <Typography variant="h5" className={styles.MovieGenre}>
                     {screening.time}
                     </Typography>
-                  ))}
+                  ))} */}
                 </Box>
                 </CardContent>
                 <Box>
-                  <Typography variant="h2" className={styles.TimeLeft}>
+                  {/* <Typography variant="h2" className={styles.TimeLeft}>
                     Liko laiko: {CalculateTimeLeft(movie.screenings[0].time)}
-                  </Typography>
-                  <Typography variant="h4" className={styles.MovieGenre} >
+                  </Typography> */}
+                  {/* <Typography variant="h4" className={styles.MovieGenre} >
                     Laisvos vietos: {movie.screenings[0].emptyseatnumber}
                   </Typography>
                   <Typography variant="h6" className={styles.MovieGenre} >
                     Kaina: {movie.screenings[0].price}
-                  </Typography>
+                  </Typography> */}
                 </Box>
                 {(role === 'admin') && (
                   <>

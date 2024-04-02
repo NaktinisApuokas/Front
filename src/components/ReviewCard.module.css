@@ -1,0 +1,36 @@
+.AddReview {
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.review {
+  display: flex;
+  align-items: left;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #f0f2f5;
+  margin-bottom: 1em;
+}
+
+.avatarSection {
+margin-right: 10px;
+}
+
+.avatar {
+width: 40px;
+height: 40px;
+}
+
+.textSection {
+flex: 1;
+text-align: left;
+}
+
+.username {
+font-weight: bold;
+margin-bottom: 4px;
+}
+
+.reviewText {
+line-height: 1.4;
+}

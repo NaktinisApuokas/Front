@@ -8,10 +8,25 @@
 }
 
 .Box {
-    width: 90em;
+    height: 19em; 
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.AddButton {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    margin-top: 2em;
+}
+
+.OpenInNewIcon {
+    margin-bottom: 0.15em;
+    margin-left: 0.5em;
 }
 
 .TableText {
+    padding-top: 0.5em;
     text-align: center;
 }
 
@@ -20,8 +35,8 @@
     width: 10em;
 }
 .Card {
-    margin: 1.3rem 1.3rem;
-    margin-top: 2rem;
+    /* margin: 1.3rem 1.3rem;
+    margin-top: 2rem; */
     height: 30em;
 }
 .ButtonCard {
@@ -37,6 +52,53 @@
     height: 30em;
     width: 20em;
 }
+
+
+.AddComment {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.comment {
+    display: flex;
+    align-items: left;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #f0f2f5;
+    margin-bottom: 1em;
+}
+  
+.avatarSection {
+margin-right: 10px;
+}
+
+.avatar {
+width: 40px;
+height: 40px;
+}
+
+.textSection {
+flex: 1;
+text-align: left;
+}
+
+.username {
+font-weight: bold;
+margin-bottom: 4px;
+}
+
+.commentText {
+line-height: 1.4;
+}
+
+.voteSection {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+margin-left: 10px;
+}
+
 
 .MovieButton{
     height: 7em;
@@ -94,7 +156,7 @@
 
 .Table {
     margin-top: 2rem;
-    border-radius: 20px;
+    border-radius: 1em;
     background-color: white;
 }
 
@@ -106,7 +168,6 @@
 
 .MovieDescription {
     text-align: left;
-    overflow-wrap: break-word;
     padding-left: 2rem;
     padding-top: 0.7rem;
 }

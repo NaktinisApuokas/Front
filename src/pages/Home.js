@@ -16,7 +16,7 @@ export default function Home() {
     <Box className={styles.BackGround}>
       {(role === 'admin') && (
       <div className="mt-5">
-        <Link to="/add_cinema"><button className="btn btn-light btn-lg w-40"> Add Cinema </button></Link>
+        <Link to="/add_cinema"><button className="btn btn-light btn-lg w-40"> Pridėti kino teatrą </button></Link>
       </div>
       )}
       <CinemasList cinemas={Cinemas} isLoading={isLoading}/>
