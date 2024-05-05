@@ -4,7 +4,7 @@ import ScreeningForm from '../components/ScreeningForm';
 export default function AddScreening() {
   return (
     <div>
-      <ScreeningForm title={"Create"} />
+      <ScreeningForm title={"Sukurti"} />
     </div>
   );
 }

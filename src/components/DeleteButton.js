@@ -1,16 +1,18 @@
 import { Button, ThemeProvider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
-import Delete from '../services/Delete';
+import DeleteComponent from '../services/Delete';
 import styles from '../css/styles.module.css';
 import theme from '../constants/theme';
 
-export default function DeleteButton({url}) {
+export default function DeleteButton({url, onDelete}) {
   return (
-    <ThemeProvider theme={theme}>
-      <Button className={styles.Buttons} color="secondary" onClick={() => Delete(url)} variant="contained" endIcon={<DeleteIcon />}>
-          Delete
-        </Button>
-    </ThemeProvider>
+    <DeleteComponent url={url} onDelete={onDelete}>
+      <ThemeProvider theme={theme}>
+        <Button className={styles.Buttons} color="secondary" variant="contained" endIcon={<DeleteIcon />}>
+            Pašalinti
+          </Button>
+      </ThemeProvider>
+  </DeleteComponent>
   );
 }

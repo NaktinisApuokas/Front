@@ -4,7 +4,7 @@ import CinemaForm from '../components/CinemaForm';
 export default function EditCinema() {
   return (
     <div>
-      <CinemaForm title={"Edit"}/>
+      <CinemaForm title={"Redaguoti"}/>
     </div>
   );
 }

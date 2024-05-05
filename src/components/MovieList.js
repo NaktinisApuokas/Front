@@ -21,19 +21,25 @@ import { AuthContext } from '../App';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
-import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
-import SpeakerNotesRoundedIcon from '@mui/icons-material/SpeakerNotesRounded';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import axios from 'axios';
+import routes from '../constants/routes';
 
-function MoviesList({movies, url, id}) {
+
+function MoviesList({movies, url, deleteUrl, id, onDelete}) {
   const [selectedCategory, setSelectedCategory] = useState("Visi");
   const [arrayToFilter, setArrayToFilter] = useState(movies);
   const [selectedTime, setSelectedTime] = useState();
   const [selectedPrice, setSelectedPrice] = useState();
   const [open, setOpen] = useState({});
-  const [favorite, setFavorite] = useState({});
+  const [favorite, setFavorite] = useState(() => {
+    const initialFavorites = {};
+    movies.forEach((movie) => {
+      initialFavorites[movie.id] = movie.isMarked;
+    });
+    return initialFavorites;
+  });
   const { role } = useContext(AuthContext);
-  const deleteUrl = `${url}/`;
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -67,6 +73,14 @@ function MoviesList({movies, url, id}) {
 
   const handleFavoriteClick = (id) => {
     setFavorite((prevState) => ({ ...prevState, [id]: !prevState[id] }));
+
+    const isFavorite = favorite[id];
+
+    if (isFavorite) {
+      handleDelete(id);
+    } else {
+      handleSubmit(id);
+    }
   };
 
   useEffect(() => {
@@ -99,11 +113,29 @@ function MoviesList({movies, url, id}) {
     
     setArrayToFilter(result);
   }, [arrayToFilter, selectedPrice]);
+
+
+  const handleSubmit = (movieid) => {
+
+    const movieMark = {
+      username: role
+    };
+    axios.post(`${routes}/cinemas/${id}/movies/${movieid}/movieMark`, movieMark)
+      .catch(error => console.log(error));
+  };
+
+  const handleDelete = (movieid) => {
+    const username = role;
+
+    axios.delete(`${routes}/cinemas/${id}/movies/${movieid}/movieMark?username=${username}`)
+      .catch(error => console.log(error));
+  };
+
   return (
     <div className={styles.BackGround}>
       {(role === 'admin') && (
       <Box className={styles.AddButton}>
-        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Add Movie </button></Link>
+        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Pridėti filmą </button></Link>
       </Box>
       )}
       <Box className={styles.Box}>
@@ -195,6 +227,17 @@ function MoviesList({movies, url, id}) {
                 </Box>
                 </CardContent>
                 <CardActions sx={{ flex: '0 1 auto' }} className={styles.CardActions}>
+                {(role === 'admin') && (
+                  <>
+                    <IconButton >
+                      <MovieEditButton linkstate={{id, movie}} url={'/edit_movie'}/>
+                    </IconButton>
+                    <IconButton >
+                      <MovieDeleteButton url={deleteUrl + movie.id}  onDelete={onDelete}/>
+                    </IconButton>
+                  </>
+                )}
+
                 <IconButton aria-label="add to favorites">
                 {typeof role !== 'undefined' && role !== '' && (
                   favorite[movie.id]
@@ -203,9 +246,6 @@ function MoviesList({movies, url, id}) {
                 )}
                 </IconButton>
                
-                <IconButton aria-label="share">
-                  <SpeakerNotesRoundedIcon />
-                </IconButton>
                 <ExpandMore
                   expand={open[movie.id]}
                   onClick={() => handleExpandClick(movie.id)}
@@ -214,32 +254,11 @@ function MoviesList({movies, url, id}) {
                   <ExpandMoreIcon />
                 </ExpandMore>
               </CardActions>
-                {(role === 'admin') && (
-                  <>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2}}>
-                      <MovieEditButton linkstate={{id, movie}} url={'/edit_movie'}/>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2}}>
-                      <MovieDeleteButton url={deleteUrl + movie.id}/>
-                    </Box>
-                  </>
-                )}
               </Box>
               <Collapse in={open[movie.id]} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography >
-                  „Japonijos dienos Kaune WA“ renginių ciklo dalis – japoniško kino popietė ir anime
-                  filmas „5 centimetrai per sekundę“.Vieno žinomiausių japonų anime filmų režisieriaus
-                   Shinkai Makoto darbai Lietuvos žiūrovams jau yra šiek tiek žinomi, tarp jų –
-                    Japonijoje populiarumo rekordus sumušusi juosta „Tavo vardas“, taip pat Lietuvoje 
-                    jau rodyti anime filmai „Orų mergaitė“, „Ten už debesų“ bei „Suzume“. M.Shinkai 
-                    pagrindinį dėmesį sutelkia į filmo personažų santykius, o fantazijos elementus 
-                    panaudoja kaip foną. Jau anksčiau festivalyje rodytas animacinis filmas „5 centimetrai
-                     per sekundę“ sugrįžta ir vėl.„5 centimetrai per sekundę“ - trijų dalių pasakojimas apie tai, 
-                     kaip geriausi draugai Takakis ir Akari po pradinės mokyklos baigimo yra priversti išsiskirti. 
-                     Puoselėdami romantiškus jausmus, jaunuoliai susirašinėja, kol galiausiai vieną žiemos dieną
-                      Takakis sėda į traukinį ir išvyksta susitikti su Akari. Sėdint traukinyje, sugrįžta praeities prisiminimai, o susitikimas su Akari kas sekundę vis artėja. Režisierius: Makoto ŠinkaiOriginali filmo kalba: japonų k.Subtitrai: lietuvių k., anglų k.Nemokami bilietai platinami tos dienos seansui likus 1 val.
-                   iki filmo pradžios „Forum Cinemas Kaunas“ kasose.©Makoto Shinkai/CoMix Wave Films
+                    {movie.description}
                   </Typography>
                 </CardContent>
               </Collapse>

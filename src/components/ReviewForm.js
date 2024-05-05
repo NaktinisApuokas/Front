@@ -30,15 +30,16 @@ export default function ReviewForm({id, movieid, onReviewSubmitted, onReviewForm
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const reviewtocreate = {
       Text: formData.Review,
       Username: role
     };
-    axios.post(`${routes}/cinemas/${id}/movies/${movieid}/review`, reviewtocreate)
+    await axios.post(`${routes}/cinemas/${id}/movies/${movieid}/review`, reviewtocreate)
     .catch((error) => { console.log(error); });
+    
     onReviewSubmitted();
     onReviewFormSubmitCloseAccordion();
     navigate('/screenings',  {state: { type: id, movieid: movieid }});

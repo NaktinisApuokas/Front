@@ -19,7 +19,7 @@ export default function AuthForm({title}) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if(title === "Login"){
+    if(title === "Prisijungti"){
         const user = {
             userName: formData.UserName,
             password: formData.Password,
@@ -45,21 +45,21 @@ export default function AuthForm({title}) {
       <h1 className="mt-5">{title}</h1>
 
       <div className="mt-5">
-        <label className="h3 form-label">User name</label>
+        <label className="h3 form-label">Prisijungimo vardas</label>
         <input value={formData.UserName} name="UserName" type="text" className="form-control" onChange={handleChange} />
       </div>
-    {title === "Register" &&
+    {title === "Registruotis" &&
         <div className="mt-4">
-            <label className="h3 form-label">Email</label>
+            <label className="h3 form-label">Elektroninis paštas</label>
             <input value={formData.Email} name="Email" type="text" className="form-control" onChange={handleChange} />
         </div>
     }
       <div className="mt-4">
-        <label className="h3 form-label">Password</label>
+        <label className="h3 form-label">Slaptažodis</label>
         <input value={formData.Password} name="Password" type="text" className="form-control" onChange={handleChange} />
       </div>
 
-      <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5">Submit</button>
+      <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5">Patvirtinti</button>
     </form>
   );
 }

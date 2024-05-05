@@ -34,6 +34,7 @@ export default function App() {
             <Route path="/" element={<Header />}>
               <Route index element={<Home />} />
               <Route path="allmovies" element={<AllMovies />} />
+              <Route path="favorite" element={<Movies Isfavorite={true} />} />
 
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
@@ -41,7 +42,7 @@ export default function App() {
               <Route path="add_cinema" element={<AddCinema />} />
               <Route path="edit_cinema" element={<EditCinema />} />
 
-              <Route path="movies" element={<Movies />} />
+              <Route path="movies" element={<Movies Isfavorite={false} />} />
               <Route path="add_movie" element={<AddMovie />} />
               <Route path="edit_movie" element={<EditMovie />} />
 

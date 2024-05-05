@@ -2,14 +2,16 @@ import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box } from '@mui/material';
 import styles from './MovieList.module.css';
-import Delete from '../services/Delete';
+import DeleteComponent from '../services/Delete'; // Changed import name
 
-export default function MovieDeleteButton({ url }) {
+export default function MovieDeleteButton({ url, onDelete }) {
   return (
-    <Box className={styles.DeleteButton} onClick={() => Delete(url)}>
-      <Box className={styles.InnerBox}>
-        <DeleteIcon className={styles.Icon}/>
-      </Box>
-    </Box>
+    <DeleteComponent url={url} onDelete={onDelete}>
+      {/* <Box className={styles.DeleteButton}>
+        <Box className={styles.InnerBox}> */}
+          <DeleteIcon className={styles.Icon} />
+        {/* </Box>
+      </Box> */}
+    </DeleteComponent>
   );
 }

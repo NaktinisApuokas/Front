@@ -6,7 +6,24 @@ import { Outlet, Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AuthContext } from '../App';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+
+function LogoutButton({ handleClick }) {
+  return (
+    <>
+      <Link className={styles.Link} onClick={handleClick}>
+        <Typography component="div" variant="h4" className={styles.HeaderText}>
+          Atsijungti
+        </Typography>
+      </Link>
+    </>
+  );
+}
+
 
 export default function header() {
   const { role, setRole } = useContext(AuthContext);
@@ -35,25 +52,39 @@ export default function header() {
                 <CircleOutlinedIcon/>
               </Divider>
               <Link className={styles.Link} to="/">
-                <Typography component="div" variant="h4">
-                  Home
+                <Typography component="div" variant="h4" className={styles.HeaderText} >
+                  Kino teatrai
                 </Typography>
               </Link>
-              <Divider orientation="vertical" flexItem>
+              <Divider orientation="vertical" flexItem classes={{root: 'white'}}>
                 <CircleOutlinedIcon/>
               </Divider>
-              <Link className={styles.Link} to="/allmovies">
-                <Typography component="div" variant="h4">
-                  Filmai
-                </Typography>
-              </Link>
-              <Divider orientation="vertical" flexItem>
+              <Accordion className={styles.Accordion}>
+                <AccordionSummary
+                expandIcon={<ExpandMoreIcon />} 
+                className={styles.AccordionSummary}
+                >
+                <Link className={styles.Link} to="/allmovies">
+                  <Typography component="div" variant="h4" className={styles.HeaderText}>
+                    Filmai
+                  </Typography>
+                </Link>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Link className={styles.Link} to="/favorite">
+                    <Typography component="div" variant="h4" className={styles.HeaderText}>
+                      Mėgstamiausi Filmai
+                    </Typography>
+                  </Link>
+                </AccordionDetails>
+              </Accordion>
+              <Divider orientation="vertical" flexItem classes={{root: 'white'}}>
                 <CircleOutlinedIcon/>
               </Divider>
               {(!role) ? (
                 <>              
                   <Link className={styles.Link} to="/login">
-                    <Typography component="div" variant="h4">
+                    <Typography component="div" variant="h4" className={styles.HeaderText}>
                       Prisijungti
                     </Typography>
                   </Link>
@@ -61,7 +92,7 @@ export default function header() {
                     <CircleOutlinedIcon/>
                   </Divider>
                   <Link className={styles.Link} to="/register">
-                    <Typography component="div" variant="h4">
+                    <Typography component="div" variant="h4" className={styles.HeaderText}>
                       Registruoti
                     </Typography>
                   </Link>
@@ -69,15 +100,17 @@ export default function header() {
               ) : (
                 <>
                   <Box className={styles.Link}>
-                    <Typography component="div" variant="h4">
+                    <Typography component="div" variant="h4" className={styles.HeaderText}>
                       {role}
                     </Typography>
                   </Box>
-                  <Link className={styles.Link} onClick={() => handleClick()}>
-                    <Typography component="div" variant="h4">
+                  <LogoutButton handleClick={handleClick} />
+
+                  {/* <Link className={styles.Link} onClick={() => handleClick()}>
+                    <Typography component="div" variant="h4" className={styles.HeaderText}>
                       Atsijungti
                     </Typography>
-                  </Link>
+                  </Link> */}
                 </>
               )}
             </Nav>

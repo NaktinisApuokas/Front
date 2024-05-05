@@ -4,7 +4,7 @@ import AuthForm from '../components/AuthForm';
 export default function Register() {
   return (
     <div>
-      <AuthForm title={"Register"}/>
+      <AuthForm title={"Registruotis"}/>
     </div>
   );
 }

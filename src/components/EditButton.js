@@ -11,7 +11,7 @@ export default function EditButton({linkstate, url}) {
     <Link className={styles.Link} to={url} state={linkstate}>
       <ThemeProvider theme={theme}>
         <Button className={styles.Buttons} color="secondary" variant="contained" endIcon={<MovieCreationRoundedIcon />}>
-          Edit
+          Redaguoti
         </Button>
       </ThemeProvider>
     </Link>

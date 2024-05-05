@@ -4,7 +4,7 @@ import AuthForm from '../components/AuthForm';
 export default function Login() {
   return (
     <div>
-      <AuthForm title={"Login"}/>
+      <AuthForm title={"Prisijungti"}/>
     </div>
   );
 }

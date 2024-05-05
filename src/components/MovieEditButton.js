@@ -7,11 +7,11 @@ import { Box } from '@mui/material';
 export default function MovieEditButton({linkstate, url}) {
   return (
     <Link className={styles.Link} to={url} state={linkstate}>
-        <Box className={styles.MovieButton}>
-          <Box className={styles.InnerBox}>
+        {/* <Box className={styles.MovieButton}>
+          <Box className={styles.InnerBox}> */}
             <EditIcon className={styles.Icon}/>
-          </Box>  
-        </Box>
+          {/* </Box>  
+        </Box> */}
     </Link>
   );
 }

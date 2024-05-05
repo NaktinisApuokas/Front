@@ -102,7 +102,7 @@ useEffect(() => {
     <div className={styles.BackGround}>
       {(role === 'admin') && (
       <Box className={styles.AddButton}>
-        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Add Movie </button></Link>
+        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Pridėti filmą </button></Link>
       </Box>
       )}
       <Box className={styles.Box}>
@@ -172,7 +172,7 @@ useEffect(() => {
           </Select>
         </FormControl>
       </Box>
-      {movies.length === 0 ?  <div className={styles.InnerBackGround} ><button className="btn btn-light text-dark btn-lg w-40"> No Movies </button></div>
+      {movies.length === 0 ?  <div className={styles.InnerBackGround} ><button className="btn btn-light text-dark btn-lg w-40"> Nėra filmų </button></div>
         :
         arrayToFilter.map((movie) => (
           <Link className={styles.Link} key={movie.id} to="/screenings" state={{ type: id, movieid: movie.id }}>

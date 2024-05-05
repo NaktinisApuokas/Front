@@ -4,7 +4,7 @@ import MovieForm from '../components/MovieForm';
 export default function AddMovie() {
   return (
     <div>
-      <MovieForm title={"Create"}/>
+      <MovieForm title={"Sukurti"}/>
     </div>
   );
 }

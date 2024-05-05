@@ -9,16 +9,26 @@ import axios from 'axios';
 export default function Screening() {
   const [reviews, setReviews] = useState([]);
   const [comments, setComments] = useState([]);
+  const [screenings, setScreenings] = useState([]);
   const { role } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const movieid = useLocation().state.movieid;
   const id = useLocation().state.type;
 
-  const url = `${routes}/cinemas/${id}/movies/${movieid}/screening`;
-  const { data:screenings, isLoading } = useQuery(url);
-   
   const urlformovie = `${routes}/cinemas/${id}/movies/${movieid}`;
   const { data:movie } = useQuery(urlformovie);
   
+  const url = `${routes}/cinemas/${id}/movies/${movieid}/screening`;
+  
+  const fetchScreenings = async () => {
+
+    setIsLoading(true);
+    const response = await axios.get(url);
+    setIsLoading(false);
+
+    setScreenings(response.data);
+  };
+
   const fetchReviews = async () => {
     const urlforReviews = `${routes}/cinemas/${id}/movies/${movieid}/review`;
     const response = await axios.get(urlforReviews);
@@ -32,6 +42,7 @@ export default function Screening() {
   };
 
   useEffect(() => {
+    fetchScreenings();
     fetchReviews();
     fetchComments();
   }, []);
@@ -47,7 +58,8 @@ export default function Screening() {
         comments={comments}
         reviews={reviews}
         onReviewSubmitted={fetchReviews}
-        onCommentSubmitted={fetchComments}/>
+        onCommentSubmitted={fetchComments}
+        onDelete={fetchScreenings}/>
     </div>
   );
 }

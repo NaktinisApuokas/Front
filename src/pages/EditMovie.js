@@ -4,7 +4,7 @@ import MovieForm from '../components/MovieForm';
 export default function EditMovie() {
   return (
     <div>
-      <MovieForm title={"Edit"}/>
+      <MovieForm title={"Redaguoti"}/>
     </div>
   );
 }

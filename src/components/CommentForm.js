@@ -30,14 +30,14 @@ export default function CommentForm({id, movieid, onCommentSubmitted, onCommentF
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const commenttocreate = {
       Text: formData.Comment,
       Username: role
     };
-    axios.post(`${routes}/cinemas/${id}/movies/${movieid}/comment`, commenttocreate)
+    await axios.post(`${routes}/cinemas/${id}/movies/${movieid}/comment`, commenttocreate)
     .catch((error) => { console.log(error); });
 
     onCommentSubmitted();

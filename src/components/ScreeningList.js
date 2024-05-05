@@ -26,13 +26,12 @@ import CommentCard from './CommentCard';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
 
-function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, onReviewSubmitted, onCommentSubmitted}) {
+function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, onReviewSubmitted, onCommentSubmitted, onDelete}) {
   const { role } = useContext(AuthContext);
   const [value, setValue] = React.useState('1');
   const [expandedReview, setExpandedReview] = useState(false);
   const [expandedComment, setExpandedComment] = useState(false);
 
-  
   const handleExpandedReviewChange = () => {
     setExpandedReview(!expandedReview);
   };
@@ -42,11 +41,11 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
   };
 
   const handleExpandedCommentChange = () => {
-    setExpandedReview(!expandedReview);
+    setExpandedComment(!expandedComment);
   };
 
   const closeCommentAccordion  = () => {
-    setExpandedReview(false); 
+    setExpandedComment(false); 
   };
 
   const handleChange = (event, newValue) => {
@@ -90,7 +89,7 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
               </Box>
               <TabPanel value="1">
               {screenings.length === 0 ?  (
-              <div className="mb-3 p-5 text-center text-light">
+              <div className="mb-3 p-5 text-center">
                 <h1>
                   Nėra seansų
                 </h1>
@@ -145,10 +144,10 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
                         {(role === 'admin') && (
                           <>
                             <td>
-                              <EditButton linkstate={{id, movieid, screeningid: screening.id}} url={'/edit_screening'}/>
+                              <EditButton linkstate={{id, movieid, screening: screening}} url={'/edit_screening'}/>
                             </td>
                             <td>
-                              <DeleteButton url={`${url}/${screening.id}`}/>
+                              <DeleteButton url={`${url}/${screening.id}`} onDelete={onDelete}/>
                             </td>
                           </>
                         )}
@@ -160,24 +159,24 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
               }
               </TabPanel>
               <TabPanel value="2">
-              {movie.comments?.length === 0 ?  (
-              <div className="mb-3 p-5 text-center text-light">
+              {(role) && (
+                <Accordion className={styles.AddComment} expanded={expandedComment} onChange={handleExpandedCommentChange}>
+                  <AccordionSummary>
+                    Pridėti komentarą
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <CommentForm id={id} movieid={movieid} onCommentSubmitted={onCommentSubmitted} onCommentFormSubmitCloseAccordion={closeCommentAccordion}/>
+                  </AccordionDetails>
+                </Accordion>
+              )}
+              {(!comments || comments.length === 0) ?  (
+              <div className="mb-3 p-5 text-center">
                 <h1>
                   Nėra komentarų
                 </h1>
               </div>)
                 :
                 <div>
-                  {(role) && (
-                    <Accordion className={styles.AddComment} expandedComment={expandedComment} onChange={handleExpandedCommentChange}>
-                      <AccordionSummary>
-                        Pridėti komentarą
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <CommentForm id={id} movieid={movieid} onCommentSubmitted={onCommentSubmitted} onCommentFormSubmitCloseAccordion={closeCommentAccordion}/>
-                      </AccordionDetails>
-                    </Accordion>
-                  )}
                 {comments?.map((comment) => (
                   <CommentCard comment={comment}>
                   </CommentCard>
@@ -185,30 +184,31 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
                 </div>
               }
               </TabPanel>
-              <TabPanel value="3"> {movie.comments?.length === 0 ?  (
-                <div className="mb-3 p-5 text-center text-light">
+              <TabPanel value="3">
+              {(role) && (
+                  <Accordion className={styles.AddComment} expanded={expandedReview} onChange={handleExpandedReviewChange}>
+                    <AccordionSummary>
+                      Pridėti recenziją
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <ReviewForm id={id} movieid={movieid} onReviewSubmitted={onReviewSubmitted} onReviewFormSubmitCloseAccordion={closeReviewAccordion}/>
+                    </AccordionDetails>
+                  </Accordion>
+                  )} 
+              {(!reviews || reviews.length === 0)?  (
+                <div className="mb-3 p-5 text-center">
                   <h1>
                     Nėra recenzijų
                   </h1>
                 </div>)
-                  :
-                  <div>
-                    {(role) && (
-                    <Accordion className={styles.AddComment} expandedReview={expandedReview} onChange={handleExpandedReviewChange}>
-                      <AccordionSummary>
-                        Pridėti recenziją
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <ReviewForm id={id} movieid={movieid} onReviewSubmitted={onReviewSubmitted} onReviewFormSubmitCloseAccordion={closeReviewAccordion}/>
-                      </AccordionDetails>
-                    </Accordion>
-                    )}
-                  {reviews?.map((review) => (
-                    <ReviewCard review={review}>
-                    </ReviewCard>
-                  ))}
-                  </div>
-                }
+                :
+                <div>
+                {reviews?.map((review) => (
+                  <ReviewCard review={review}>
+                  </ReviewCard>
+                ))}
+                </div>
+              }
               </TabPanel>
             </TabContext>
           </Box>
