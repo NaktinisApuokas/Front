@@ -21,8 +21,8 @@ export const AuthContext = createContext();
 export default function App() {
   const [role, setRole] = useState('');
   const style = {
-    backgroundColor: '#f0f0f0', // Your desired background color
-    minHeight: '100vh', // Ensure it covers the full viewport height
+    backgroundColor: '#f0f0f0', 
+    minHeight: '100vh',
     margin: 0,
     padding: 0,
   };

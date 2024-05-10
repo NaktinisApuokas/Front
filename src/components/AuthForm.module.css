@@ -1,0 +1,11 @@
+.PasswordValidation {
+    margin: 1.3rem 1.3rem;
+    margin-top: 5rem;
+    height: 9em;
+    padding: 1em;
+}
+
+.Error{
+    color: red;
+    margin: 1em;
+}

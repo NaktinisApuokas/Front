@@ -2,19 +2,28 @@ import React, { useContext, useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import withLoading from '../HOCs/withLoading';
 import styles from './MovieList.module.css';
-import { Card, Typography, Box, CardContent, CardMedia, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Card,
+  Typography,
+  Box,
+  CardContent,
+  CardMedia,
+  FormControl, 
+  InputLabel, 
+  Select, 
+  MenuItem,
+  IconButton,
+  CardActions } from '@mui/material';
 import MovieEditButton from './MovieEditButton';
 import MovieDeleteButton from './MovieDeleteButton';
 import { AuthContext } from '../App';
 
-function AllMoviesList({movies, url, id}) {
+function AllMoviesList({movies, url, deleteUrl, id, onDelete}) {
   const [selectedCategory, setSelectedCategory] = useState();
   const [selectedCity, setSelectedCity] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [selectedPrice, setSelectedPrice] = useState();
   const [arrayToFilter, setArrayToFilter] = useState(movies);
   const { role } = useContext(AuthContext);
-  const deleteUrl = `${url}/`;
 
   function CalculateTimeLeft(time) {
     var both  = time.split(':');
@@ -110,19 +119,24 @@ useEffect(() => {
           <b>Filtruoti: </b>
         </Typography>
         <FormControl className={styles.Filter} >
-          <InputLabel id="demo-simple-select-label">Žandras</InputLabel>
+          <InputLabel id="demo-simple-select-label">Žanras</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={selectedCategory}
-            label="Žandras"
+            label="Žanras"
             onChange={handleCategoryChange}
           >
-            <MenuItem value="Visi">Visi</MenuItem>
+            <MenuItem value="">Visi</MenuItem>
             <MenuItem value="Animacija">Animacija</MenuItem>
             <MenuItem value="Nuotykių">Nuotykių</MenuItem>
             <MenuItem value="Romantinis">Romantinis</MenuItem>
             <MenuItem value="Drama">Drama</MenuItem>
+            <MenuItem value="Fantastinis">Fantastinis</MenuItem>
+            <MenuItem value="Siaubo">Siaubo</MenuItem>
+            <MenuItem value="Šeimos">Šeimos</MenuItem>
+            <MenuItem value="Trileris">Trileris</MenuItem>
+            <MenuItem value="Veiksmo">Veiksmo</MenuItem>
             <MenuItem value="Komedija">Komedija</MenuItem>
           </Select>
         </FormControl>
@@ -175,58 +189,60 @@ useEffect(() => {
       {movies.length === 0 ?  <div className={styles.InnerBackGround} ><button className="btn btn-light text-dark btn-lg w-40"> Nėra filmų </button></div>
         :
         arrayToFilter.map((movie) => (
-          <Link className={styles.Link} key={movie.id} to="/screenings" state={{ type: id, movieid: movie.id }}>
-            <Card className={styles.Card}>
-              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <CardMedia
-                  className={styles.Photo}
-                  image={movie.img}
-                />
-                <CardContent sx={{ flex: '1 0 auto' }}>
+          <Card className={styles.Card}>
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <CardMedia
+                className={styles.Photo}
+                image={movie.img}
+              />
+              <CardContent sx={{ flex: '1 0 auto' }}>
+              <Link className={styles.Link} key={movie.id} to="/screenings" state={{ type: id, movieid: movie.id }}>
                 <Typography component="div" variant="h3" className={styles.MovieTitle}>
                 {movie.title}
                 </Typography>
-                <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-                  <b>Žandras: </b>{movie.genre}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-                <b>Trukmė: </b>{movie.duration}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-                {movie.cinema.name}
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                  {/* {movie.screenings.map((screening) => (
-                    <Typography variant="h5" className={styles.MovieGenre}>
-                    {screening.time}
-                    </Typography>
-                  ))} */}
-                </Box>
-                </CardContent>
-                <Box>
-                  {/* <Typography variant="h2" className={styles.TimeLeft}>
-                    Liko laiko: {CalculateTimeLeft(movie.screenings[0].time)}
-                  </Typography> */}
-                  {/* <Typography variant="h4" className={styles.MovieGenre} >
-                    Laisvos vietos: {movie.screenings[0].emptyseatnumber}
+              </Link>
+              <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+                <b>Žanras: </b>{movie.genre}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+              <b>Trukmė: </b>{movie.duration}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+              {movie.cinema.name}
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                {/* {movie.screenings.map((screening) => (
+                  <Typography variant="h5" className={styles.MovieGenre}>
+                  {screening.time}
                   </Typography>
-                  <Typography variant="h6" className={styles.MovieGenre} >
-                    Kaina: {movie.screenings[0].price}
-                  </Typography> */}
-                </Box>
-                {(role === 'admin') && (
-                  <>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2}}>
-                      <MovieEditButton linkstate={{id, movie}} url={'/edit_movie'}/>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2}}>
-                      <MovieDeleteButton url={deleteUrl + movie.id}/>
-                    </Box>
-                  </>
-                )}
+                ))} */}
               </Box>
-            </Card>
-          </Link>
+              </CardContent>
+              <Box>
+                {/* <Typography variant="h2" className={styles.TimeLeft}>
+                  Liko laiko: {CalculateTimeLeft(movie.screenings[0].time)}
+                </Typography> */}
+                {/* <Typography variant="h4" className={styles.MovieGenre} >
+                  Laisvos vietos: {movie.screenings[0].emptyseatnumber}
+                </Typography>
+                <Typography variant="h6" className={styles.MovieGenre} >
+                  Kaina: {movie.screenings[0].price}
+                </Typography> */}
+              </Box>
+              <CardActions>
+              {(role === 'admin') && (
+                <>
+                  <IconButton >
+                    <MovieEditButton linkstate={{id, movie}} url={'/edit_movie'}/>
+                  </IconButton>
+                  <IconButton >
+                    <MovieDeleteButton url={deleteUrl + movie.id}  onDelete={onDelete}/>
+                  </IconButton>
+                </>
+              )}
+              </CardActions>
+            </Box>
+          </Card>
         ))
       }
     </div>

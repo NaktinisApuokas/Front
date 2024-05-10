@@ -41,7 +41,7 @@ const MovieCard = ({ key, movie, role, deleteUrl }) => {
                   </Typography>
                 </Link>
                 <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-                  <b>Žandras: </b>{movie.genre}
+                  <b>Žanras: </b>{movie.genre}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
                 <b>Trukmė: </b>{movie.duration}

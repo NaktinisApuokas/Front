@@ -143,12 +143,12 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
           <b>Filtruoti: </b>
         </Typography>
         <FormControl className={styles.Filter} >
-          <InputLabel id="demo-simple-select-label">Žandras</InputLabel>
+          <InputLabel id="demo-simple-select-label">Žanras</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={selectedCategory}
-            label="Žandras"
+            label="Žanras"
             onChange={handleCategoryChange}
           >
             <MenuItem value="">Visi</MenuItem>
@@ -156,6 +156,11 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
             <MenuItem value="Nuotykių">Nuotykių</MenuItem>
             <MenuItem value="Romantinis">Romantinis</MenuItem>
             <MenuItem value="Drama">Drama</MenuItem>
+            <MenuItem value="Fantastinis">Fantastinis</MenuItem>
+            <MenuItem value="Siaubo">Siaubo</MenuItem>
+            <MenuItem value="Šeimos">Šeimos</MenuItem>
+            <MenuItem value="Trileris">Trileris</MenuItem>
+            <MenuItem value="Veiksmo">Veiksmo</MenuItem>
             <MenuItem value="Komedija">Komedija</MenuItem>
           </Select>
         </FormControl>
@@ -206,7 +211,7 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
                   </Typography>
                 </Link>
                 <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-                  <b>Žandras: </b>{movie.genre}
+                  <b>Žanras: </b>{movie.genre}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
                 <b>Trukmė: </b>{movie.duration}
