@@ -48,7 +48,7 @@ export default function CommentForm({id, movieid, onCommentSubmitted, onCommentF
   const getBorderColor = () => {
     const length = formData.Comment.length;
     if (length > 300) return 'error.main'; 
-    return 'DarkSlateGray'; 
+    return '#34454c'; 
   };
 
   const handleEmojiSelect = (emoji) => {

@@ -1,5 +1,9 @@
 import React from 'react';
-import { Typography, Box, Avatar } from '@mui/material';
+import { 
+  Typography, 
+  Box, 
+  Avatar 
+} from '@mui/material';
 import styles from './ReviewCard.module.css';
 
 const ReviewCard = ({ review, id, movieid }) => {

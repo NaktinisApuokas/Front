@@ -1,28 +1,27 @@
 # Diff Summary
 
-Date : 2024-05-06 08:00:03
+Date : 2024-05-14 20:33:01
 
 Directory c:\\Users\\Airis\\Desktop\\Front
 
-Total : 17 files,  117 codes, 6 comments, 33 blanks, all 156 lines
+Total : 9 files,  132 codes, -3 comments, 15 blanks, all 144 lines
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| JavaScript | 15 | 112 | 4 | 33 | 149 |
-| CSS | 2 | 5 | 2 | 0 | 7 |
+| CSS | 5 | 77 | 0 | 17 | 94 |
+| JavaScript | 4 | 55 | -3 | -2 | 50 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 17 | 117 | 6 | 33 | 156 |
-| src | 17 | 117 | 6 | 33 | 156 |
-| src\\HOCs | 1 | 1 | 0 | 0 | 1 |
-| src\\components | 11 | 62 | 5 | 21 | 88 |
-| src\\css | 1 | 7 | 0 | 0 | 7 |
-| src\\pages | 3 | 33 | 1 | 10 | 44 |
-| src\\services | 1 | 14 | 0 | 2 | 16 |
+| . | 9 | 132 | -3 | 15 | 144 |
+| src | 9 | 132 | -3 | 15 | 144 |
+| src\\HOCs | 1 | 8 | 0 | -1 | 7 |
+| src\\components | 5 | 106 | -3 | 12 | 115 |
+| src\\css | 2 | 17 | 0 | 4 | 21 |
+| src\\pages | 1 | 1 | 0 | 0 | 1 |
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)

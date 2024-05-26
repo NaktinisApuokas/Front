@@ -17,12 +17,19 @@
     height: 3em;
     width: 10em;
 }
+
 .Card {
     margin: 1.3rem 1.3rem;
     margin-top: 2rem;
     border-radius: 1em;
     position: relative;
+    overflow-y: auto;
 }
+.Card::-webkit-scrollbar {
+   display: none;
+}
+
+
 .ButtonCard {
     display: flex;
     justify-content: center;
@@ -43,7 +50,7 @@
     display: flex;
     justify-content: center;
     border-radius: 50%;
-    background-color: DarkSlateGray;
+    background-color: #34454c;
 }
 
 .DeleteButton{
@@ -54,7 +61,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: DarkSlateGray;
+    background-color: #34454c;
 }
 
 .InnerBox {
@@ -102,7 +109,6 @@
 .MovieTitle {
     text-align: left;
     font-weight: bold;
-    overflow: hidden;
     width: 100%;
     max-height: 107px;
     padding-bottom: 0.5rem;
@@ -137,20 +143,24 @@
     display: flex;
     padding: 1rem;
     height: 5em;
-    width: 50em;
+    width: 80%;
     align-items: center;
-    border-radius: 1em;
+    border-radius: 10px;
     background-color: white;
+    justify-content: center;
 }
 
 .Filter {
     width: 8em;
 }
 .Sort {
-    width: 8em;
-    margin-left: 1em;
+    display: flex;
+    width: 10em;
 }
 
+.SortSelect{
+    margin-right: 1em;
+}
 .FilterText {
     margin-left: 2rem;
     padding: 1rem;
@@ -163,12 +173,17 @@
 }
 .BackGround {
     background-color: #34454c;
-    padding: 5rem;
-    min-height : '100vh';
+    padding: 5%;
     align-items: top;
     text-align: center;
     justify-content: center;
+    height: 85vh;
+    overflow-y: auto;
 }
+
+.BackGround::-webkit-scrollbar {
+    display: none;
+  }
 
 .FullBackGround {
     background-color: #34454c;

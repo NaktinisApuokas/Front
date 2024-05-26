@@ -3,8 +3,6 @@ import MovieForm from '../components/MovieForm';
 
 export default function AddMovie() {
   return (
-    <div>
       <MovieForm title={"Sukurti"}/>
-    </div>
   );
 }

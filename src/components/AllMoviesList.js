@@ -12,7 +12,8 @@ import { Card,
   Select, 
   MenuItem,
   IconButton,
-  CardActions } from '@mui/material';
+  CardActions,
+  TextField } from '@mui/material';
 import MovieEditButton from './MovieEditButton';
 import MovieDeleteButton from './MovieDeleteButton';
 import { AuthContext } from '../App';
@@ -24,6 +25,8 @@ function AllMoviesList({movies, url, deleteUrl, id, onDelete}) {
   const [selectedPrice, setSelectedPrice] = useState();
   const [arrayToFilter, setArrayToFilter] = useState(movies);
   const { role } = useContext(AuthContext);
+
+  const [searchTerm, setSearchTerm] = useState('');
 
   function CalculateTimeLeft(time) {
     var both  = time.split(':');
@@ -79,8 +82,9 @@ function AllMoviesList({movies, url, deleteUrl, id, onDelete}) {
     let result = movies;
     result = filterGenre(result);
     result = filterCity(result);
+    result = result.filter((movie) => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setArrayToFilter(result);
-}, [selectedCategory, selectedCity]);
+}, [selectedCategory, selectedCity, searchTerm]);
 
 useEffect(() => {
   let result = arrayToFilter;
@@ -107,6 +111,11 @@ useEffect(() => {
   setArrayToFilter(result);
 }, [selectedPrice]);
 
+
+const handleSearchChange = (event) => {
+  setSearchTerm(event.target.value);
+};
+
   return (
     <div className={styles.BackGround}>
       {(role === 'admin') && (
@@ -115,6 +124,12 @@ useEffect(() => {
       </Box>
       )}
       <Box className={styles.Box}>
+        <TextField
+          label="Paieška"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
         <Typography variant="subtitle1" color="text.secondary" className={styles.FilterText}>
           <b>Filtruoti: </b>
         </Typography>
@@ -125,6 +140,7 @@ useEffect(() => {
             id="demo-simple-select"
             value={selectedCategory}
             label="Žanras"
+            className={styles.SortSelect}
             onChange={handleCategoryChange}
           >
             <MenuItem value="">Visi</MenuItem>
@@ -166,6 +182,7 @@ useEffect(() => {
             id="demo-simple-select"
             value={selectedTime}
             label="Laikas"
+            className={styles.SortSelect}
             onChange={handleTimeChange}
           >
             <MenuItem value="Artimiausi">Artimiausi</MenuItem>

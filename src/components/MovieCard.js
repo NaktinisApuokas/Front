@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Card, CardActions, IconButton, Typography, Collapse, Box, CardContent, CardMedia } from '@mui/material';
+import { 
+  Card, 
+  CardActions, 
+  IconButton, 
+  Typography, 
+  Collapse, 
+  Box, 
+  CardContent, 
+  CardMedia 
+} from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';

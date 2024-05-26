@@ -48,7 +48,7 @@ export default function ReviewForm({id, movieid, onReviewSubmitted, onReviewForm
   const getBorderColor = () => {
     const length = formData.Review.length;
     if (length < 300) return 'error.main'; 
-    return 'DarkSlateGray'; 
+    return '#34454c'; 
   };
 
   const handleEmojiSelect = (emoji) => {

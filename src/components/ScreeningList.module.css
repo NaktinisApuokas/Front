@@ -106,7 +106,7 @@ margin-left: 10px;
     display: flex;
     justify-content: center;
     border-radius: 50%;
-    background-color: DarkSlateGray;
+    background-color: #34454c;
 }
 
 .DeleteButton{
@@ -117,7 +117,7 @@ margin-left: 10px;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: DarkSlateGray;
+    background-color: #34454c;
 }
 
 .InnerBox {
@@ -177,13 +177,12 @@ margin-left: 10px;
     justify-content: right;
 }
 .BackGround {
-    height: 100em;
     padding: 5rem;
     min-height : '100vh';
     align-items: top;
     text-align: center;
     justify-content: center;
-    background-color: DarkSlateGray;
+    background-color: #34454c;
 }
 .InnerBackGround {
     height: 100em;
@@ -191,5 +190,11 @@ margin-left: 10px;
     align-items: top;
     text-align: center;
     justify-content: center;
-    background-color: DarkSlateGray;
+    background-color: #34454c;
+    height: 85vh;
+    overflow-y: auto;
 }
+
+.InnerBackGround::-webkit-scrollbar {
+    display: none;
+  }

@@ -71,7 +71,6 @@
 .BackGround {
     background-color: #34454c;
     height: 80em;
-    padding: 5rem;
     min-height : '100vh';
     align-items: top;
     text-align: center;
@@ -88,15 +87,44 @@
 }
 
 .LoadingText {
+    display: flex;
+    background-color: #34454c;
     padding: 5rem;
     min-height : '100vh';
     align-items: top;
     text-align: center;
     justify-content: center;
 }
+
+.LoadingCard {
+    padding: 5rem;
+    width: 70%;
+}
+
 .InnerBackGround {
     padding: 5rem;
     align-items: top;
     text-align: center;
     justify-content: center;
+}
+
+.NewBackGroundColor {
+    background-color: #34454c;
+    width: 100%;
+    display: flex;
+    height: 85vh;
+    overflow-y: scroll;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.NewBackGroundColor::-webkit-scrollbar{
+    display: none;
+}
+
+.FormCard {
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    margin: 5em auto;
 }

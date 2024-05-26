@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '../constants/routes';
+import { 
+  Box, 
+  Card, 
+  Typography 
+} from '@mui/material';
+import allStyles from '../css/styles.module.css';
+import styles from './CinemaForm.module.css';
 
 export default function ScreeningForm({title}) {
 
@@ -58,30 +65,36 @@ export default function ScreeningForm({title}) {
   };
 
   return (
-    <form className="w-100 px-5">
-      <h1 className="mt-5">{title} seansą</h1>
+    <Box className={allStyles.NewBackGroundColor}>
+      <Card className={allStyles.FormCard}>
+        <Typography className={styles.Title} variant="h2">{title} seansą
+        </Typography>
+        <Box className={styles.FormBox}>
+          <form className="w-100 px-5">
+            <div className="mt-5">
+              <label className="h3 form-label">Seanso laikas</label>
+              <input value={formData.time} name="time" type="text" className="form-control" onChange={handleChange} />
+            </div>
 
-      <div className="mt-5">
-        <label className="h3 form-label">Seanso laikas</label>
-        <input value={formData.time} name="time" type="text" className="form-control" onChange={handleChange} />
-      </div>
+            <div className="mt-4">
+              <label className="h3 form-label">Seanso kaina</label>
+              <input value={formData.price} name="price" type="text" className="form-control" onChange={handleChange} />
+            </div>
 
-      <div className="mt-4">
-        <label className="h3 form-label">Seanso kaina</label>
-        <input value={formData.price} name="price" type="text" className="form-control" onChange={handleChange} />
-      </div>
+            <div className="mt-4">
+              <label className="h3 form-label">Bilietų įsigijimo nuoroda</label>
+              <input value={formData.url} name="url" type="text" className="form-control" onChange={handleChange} />
+            </div>
 
-      <div className="mt-4">
-        <label className="h3 form-label">Bilietų įsigijimo nuoroda</label>
-        <input value={formData.url} name="url" type="text" className="form-control" onChange={handleChange} />
-      </div>
+            <div className="mt-4">
+              <label className="h3 form-label">Tuščių vietų kiekis</label>
+              <input value={formData.emptyseatnumber} name="emptyseatnumber" type="text" className="form-control" onChange={handleChange} />
+            </div>
 
-      <div className="mt-4">
-        <label className="h3 form-label">Tuščių vietų kiekis</label>
-        <input value={formData.emptyseatnumber} name="emptyseatnumber" type="text" className="form-control" onChange={handleChange} />
-      </div>
-
-        <button className="btn btn-dark btn-lg w-100 mt-5"  onClick={handleSubmit}>Patvirtinti</button>
-    </form>
+              <button className="btn btn-dark btn-lg w-100 mt-5"  onClick={handleSubmit}>Patvirtinti</button>
+          </form>
+        </Box>
+      </Card>
+    </Box>
   );
 }

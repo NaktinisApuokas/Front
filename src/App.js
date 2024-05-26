@@ -21,8 +21,7 @@ export const AuthContext = createContext();
 export default function App() {
   const [role, setRole] = useState('');
   const style = {
-    backgroundColor: '#f0f0f0', 
-    minHeight: '100vh',
+    backgroundColor: '#34454c', 
     margin: 0,
     padding: 0,
   };
@@ -33,6 +32,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Header />}>
               <Route index element={<Home />} />
+              <Route path="cinemas" element={<Home />} />
               <Route path="allmovies" element={<AllMovies />} />
               <Route path="favorite" element={<Movies Isfavorite={true} />} />
 

@@ -14,7 +14,8 @@ import {
   FormControl, 
   InputLabel, 
   Select, 
-  MenuItem } from '@mui/material';
+  MenuItem,
+  TextField } from '@mui/material';
 import MovieEditButton from './MovieEditButton';
 import MovieDeleteButton from './MovieDeleteButton';
 import { AuthContext } from '../App';
@@ -40,6 +41,35 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
     return initialFavorites;
   });
   const { role } = useContext(AuthContext);
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  function CalculateTimeLeft(time) {
+    var both  = time.split(':');
+    var hours = both[0];
+
+    var minutes = both[1];
+    let today = new Date();
+    
+    var lefth = hours - today.getHours();
+    var leftmin = minutes - today.getMinutes();
+
+    if(leftmin < 0){
+      leftmin = leftmin + 60;
+      lefth--;
+    }
+    if(lefth < 0){
+      lefth = "0";
+    }
+    if(lefth < 10){
+      lefth = '0' + lefth;
+    }
+    
+    if(leftmin < 10){
+      leftmin = '0' + leftmin;
+    }
+    return(`${lefth}:${leftmin}`);
+  }
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -86,8 +116,9 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
   useEffect(() => {
     let result = movies;
     result = filterGenre(result);
+    result = result.filter((movie) => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setArrayToFilter(result);
-}, [selectedCategory]);
+  }, [selectedCategory, searchTerm, movies]);
 
   useEffect(() => {
     let result = arrayToFilter;
@@ -114,6 +145,9 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
     setArrayToFilter(result);
   }, [arrayToFilter, selectedPrice]);
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const handleSubmit = (movieid) => {
 
@@ -139,6 +173,12 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
       </Box>
       )}
       <Box className={styles.Box}>
+        <TextField
+          label="Paieška"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
         <Typography variant="subtitle1" color="text.secondary" className={styles.FilterText}>
           <b>Filtruoti: </b>
         </Typography>
@@ -174,6 +214,7 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
             id="demo-simple-select"
             value={selectedTime}
             label="Laikas"
+            className={styles.SortSelect}
             onChange={handleTimeChange}
           >
             <MenuItem value="Artimiausi">Artimiausi</MenuItem>

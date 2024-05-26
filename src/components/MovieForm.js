@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '../constants/routes';
+import { 
+  Box, 
+  Card, 
+  Typography 
+} from '@mui/material';
+import allStyles from '../css/styles.module.css';
+import styles from './CinemaForm.module.css';
 
 export default function MovieForm({ title }) {
   const location = useLocation();
@@ -61,36 +68,48 @@ export default function MovieForm({ title }) {
   };
 
   return (
-    <form className="w-100 px-5" onSubmit={handleSubmit}>
-      <h1 className="mt-5">{title} Filmas</h1>
+    <Box className={allStyles.NewBackGroundColor}>
+      <Card className={allStyles.FormCard}>
+        <Typography className={styles.Title} variant="h2">{title} filmą
+        </Typography>
+        <Box className={styles.FormBox}>
+          <form className="w-100 px-5" onSubmit={handleSubmit}>
+            {title === "Sukurti" && (
+              <>
+                <div className="mt-5">
+                  <label className="h3 form-label">Filmo pavadinimas</label>
+                  <input value={formData.title} name="title" type="text" className="form-control" onChange={handleChange} />
+                </div>
+                <div className="mt-4">
+                  <label className="h3 form-label">Filmo žanras</label>
+                  <input value={formData.genre} name="genre" type="text" className="form-control" onChange={handleChange} />
+                </div>
+                <div className="mt-4">
+                  <label className="h3 form-label">Filmo nuotrauka</label>
+                  <input value={formData.img} name="img" type="text" className="form-control" onChange={handleChange} />
+                </div>
+                <div className="mt-4">
+                  <label className="h3 form-label">Filmo trukmė</label>
+                  <input value={formData.duration} name="duration" type="text" className="form-control" onChange={handleChange} />
+                </div>
+              </>
+            )}
+            
+            <div className="mt-4">
+              <label className="h3 form-label">Filmo aprašymas</label>
+              <textarea
+                value={formData.description}
+                name="description"
+                className="form-control"
+                onChange={handleChange}
+                rows="4"
+              />
+            </div>
 
-      {title === "Sukurti" && (
-        <>
-          <div className="mt-5">
-            <label className="h3 form-label">Filmo pavadinimas</label>
-            <input value={formData.title} name="title" type="text" className="form-control" onChange={handleChange} />
-          </div>
-          <div className="mt-4">
-            <label className="h3 form-label">Filmo žanras</label>
-            <input value={formData.genre} name="genre" type="text" className="form-control" onChange={handleChange} />
-          </div>
-          <div className="mt-4">
-            <label className="h3 form-label">Filmo nuotrauka</label>
-            <input value={formData.img} name="img" type="text" className="form-control" onChange={handleChange} />
-          </div>
-          <div className="mt-4">
-            <label className="h3 form-label">Filmo trukmė</label>
-            <input value={formData.duration} name="duration" type="text" className="form-control" onChange={handleChange} />
-          </div>
-        </>
-      )}
-      
-      <div className="mt-4">
-        <label className="h3 form-label">Filmo aprašymas</label>
-        <input value={formData.description} name="description" type="text" className="form-control" onChange={handleChange} />
-      </div>
-
-      <button type="submit" className="btn btn-dark btn-lg w-100 mt-5">Patvirtinti</button>
-    </form>
+            <button type="submit" className="btn btn-dark btn-lg w-100 mt-5">Patvirtinti</button>
+          </form>
+        </Box>
+      </Card>
+    </Box>
   );
 }
