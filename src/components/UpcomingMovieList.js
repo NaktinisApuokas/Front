@@ -92,6 +92,12 @@ function UpcomingMovieList({movies, url, deleteUrl, onDelete}) {
       .catch(error => console.log(error));
   };
 
+  const getEmbedUrl = (url) => {
+    if (!url) return null;
+    const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  };
+  
   return (
     <div className={styles.BackGround}>
       {(role === 'admin') && (
@@ -132,22 +138,22 @@ function UpcomingMovieList({movies, url, deleteUrl, onDelete}) {
           </Select>
         </FormControl>
       </Box>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
         {movies.length === 0 ?  <div className={styles.FullBackGround} ><button className="btn btn-light text-dark btn-lg w-40"> Nėra filmų </button></div>
           :
           arrayToFilter.map((movie) => (
           <Card className={styles.Card}>
-                <Box sx={{ display: 'flex', flexDirection: 'row' }} >
+                <Box sx={{ display: 'flex', flexDirection: 'column' }} >
                   <CardMedia
                     className={styles.Photo}
                     image={movie.img}
-                    sx={{ objectFit: "fill", width: '15em', flex: '0 0 auto' }}
+                    sx={{ objectFit: "fill", width: '100%', flex: '0 0 auto' }}
                   />
                   <CardContent
                     sx={{ flex: '1 1 auto', p: 0, display: 'flex', flexDirection: 'column' }}
                     className={styles.CardContent}
                   >
-                  <Typography variant="h3" className={styles.MovieGenre}>
+                  <Typography variant="h6" className={styles.MovieGenre}>
                     {movie.title}
                   </Typography>
                   <Typography variant="subtitle1" color="text.secondary"  className={styles.MovieGenre}>
@@ -155,7 +161,7 @@ function UpcomingMovieList({movies, url, deleteUrl, onDelete}) {
                   </Typography>
                   <Box className={styles.GenreRow}>
                     <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-                      <b>Žanras: </b>{movie.genre}
+                    {movie.genre}
                     </Typography>
                   {movie.trailerURL && (
                     <Button
@@ -167,12 +173,6 @@ function UpcomingMovieList({movies, url, deleteUrl, onDelete}) {
                     </Button>
                   )}
                   </Box>
-
-                  <Box sx={{ mt: 'auto' }}>
-                    <Typography variant="h4" className={styles.Date}>
-                      <b>Kinuose nuo: {movie.date}</b>
-                    </Typography>
-                  </Box>
                   {showTrailer[movie.id] && (
                     <Box className={styles.TrailerOverlay}>
                       <Box className={styles.YoutubeCard}>
@@ -180,7 +180,7 @@ function UpcomingMovieList({movies, url, deleteUrl, onDelete}) {
                         <iframe
                           width="1120"
                           height="630"
-                          src={movie.trailerURL}
+                          src={getEmbedUrl(movie.trailerURL)}
                           title={`${movie.title} trailer`}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -189,6 +189,11 @@ function UpcomingMovieList({movies, url, deleteUrl, onDelete}) {
                       </Box>
                     </Box>
                   )}
+                  <Box sx={{ mt: 'auto' }}>
+                    <Typography variant="h4" className={styles.Date}>
+                      <b>Kinuose nuo: {movie.date}</b>
+                    </Typography>
+                  </Box>
                   </CardContent>
                   <CardActions sx={{ flex: '0 1 auto' }} className={styles.CardActions}>
                   {(role === 'admin') && (
