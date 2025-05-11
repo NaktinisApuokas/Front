@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from 'react';
 import MoviesList from '../components/MovieList';
 import {useLocation}  from 'react-router-dom';
 import routes from '../constants/routes';
-import useQuery from '../hooks/useQuery';
 import { AuthContext } from '../App';
 import axios from 'axios';
 
@@ -20,8 +19,6 @@ export default function Movies({Isfavorite}) {
   }
   
   const deleteUrl = `${routes}/cinemas/${id}/movies/`;
-
-  //const { data:movies, isLoading } = useQuery(url);
 
   const fetchMovies = async () => {
     setIsLoading(true);

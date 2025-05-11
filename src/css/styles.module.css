@@ -124,7 +124,16 @@
 
 .FormCard {
     display: flex;
-    width: 90%;
+    width: 40%;
     flex-direction: column;
     margin: 5em auto;
 }
+
+* {
+    user-select: none; 
+  }
+  
+  img {
+    pointer-events: none;
+  }
+

@@ -1,0 +1,160 @@
+.BackGround {
+    background-color: #34454c;
+    padding: 5%;
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+    height: 85vh;
+    overflow-y: auto;
+}
+
+.BackGround::-webkit-scrollbar {
+    display: none;
+}
+
+.FullBackGround {
+    background-color: #34454c;
+    padding: 5rem;
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+}
+
+.AddButton {
+    margin-bottom: 2rem;
+}
+
+.Box {
+    margin: auto;
+    display: flex;
+    height: 5em;
+    width: 40%;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    justify-content: center;
+}
+
+.Card {
+    margin: 1.3rem 1.3rem;
+    margin-top: 2rem;
+    border-radius: 1em;
+    position: relative;
+    overflow-y: auto;
+    width: 30%;
+}
+
+.CardContent{
+    width: 100%;
+}
+
+.CardActions{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    scale:1.5;
+    display: flex;
+    align-items: right;
+}
+
+.MovieGenre {
+    text-align: left;
+    padding: 0.5em;
+}
+
+
+.Date {
+    background-color: #6d8e9c;
+    text-align: left;
+    padding: 0.6em;
+    color: aliceblue;
+}
+
+.Photo {
+    height: 20em;
+    width: 15em;
+}
+
+.Card::-webkit-scrollbar {
+   display: none;
+}
+
+.Filter {
+    width: 8em;
+}
+
+.Sort {
+    display: flex;
+    width: 10em;
+}
+
+.SortSelect{
+    margin-right: 1em;
+}
+
+.FilterText {
+    margin-left: 2rem;
+    padding: 1rem;
+}
+
+.TrailerOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.YoutubeCard {
+    position: relative;
+    background: transparent; 
+    padding: 0;          
+    border-radius: 0;       
+    box-shadow: none;       
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+
+.CloseButton {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.GenreRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1px;
+}
+
+.TrailerButton {
+    font-weight: bold;
+    border: 5px solid #6d8e9c;
+    border-radius: 5px;
+    color: black;
+    margin-right: 45px;
+}
+
+.TrailerButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}

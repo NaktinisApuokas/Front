@@ -1,0 +1,91 @@
+.BackGround {
+    background-color: #34454c;
+    padding: 5%;
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+    height: 85vh;
+    overflow-y: auto;
+}
+
+.BackGround::-webkit-scrollbar {
+    display: none;
+}
+
+.Card {
+    margin: 1.3rem 1.3rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow-y: auto;
+}
+
+.HallCard {
+    margin: 1.3rem 1.3rem;
+    margin-top: 2rem;
+    border-radius: 1em;
+    position: relative;
+    overflow-y: auto;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20%;
+    height: 30%;
+}
+
+.HallCard::-webkit-scrollbar {
+    display: none;
+ }
+
+.Card::-webkit-scrollbar {
+   display: none;
+}
+
+.CardGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+  }
+
+.Photo {
+    height: 20em;
+}
+
+.Link {
+    color: inherit;
+    text-decoration: none;
+    margin: 0px;
+    width: 100%;
+}
+
+.AddButton {
+    margin-bottom: 2rem;
+}
+
+.FullBackGround {
+    background-color: #34454c;
+    padding: 5rem;
+    align-items: top;
+    text-align: center;
+    justify-content: center;
+}
+
+.CardContent{
+    text-align: left;
+    width: 100%;
+}
+
+.MovieTitle {
+    text-align: left;
+    font-weight: bold;
+    width: 100%;
+    max-height: 107px;
+    padding-bottom: 0.5rem;
+    padding-top: 1rem;
+}
+
+.CardActions {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    transform: scale(1.5); 
+  }

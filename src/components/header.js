@@ -14,7 +14,6 @@ import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AuthContext } from '../App';
-import { makeStyles } from "@material-ui/core/styles";
 
 
 function LogoutButton({ handleClick }) {
@@ -32,7 +31,9 @@ function LogoutButton({ handleClick }) {
 export default function header() {
   const { role, setRole } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);  
+  const [expandedMovie, setExpandedMovie] = useState(false);
+  const [expandedProfile, setExpandedProfile] = useState(false);
 
   const handleChange = () => {
     setExpanded(!expanded);
@@ -42,6 +43,26 @@ export default function header() {
     setRole(null);
     navigate('/');
   };
+
+  const handleAccordionToggle = () => {
+    setExpandedMovie(prev => !prev);
+  };
+
+
+  const handleDetailsClick = () => {
+    setExpandedMovie(false);
+  };
+
+  const handleAccordionProfileToggle = () => {
+    setExpandedProfile(prev => !prev);
+  };
+
+
+  const handleDetailsProfileClick = () => {
+    setExpandedProfile(false);
+  };
+
+
   return (
     <Box className={styles.WholeHeader}>
       <Box className={styles.HeaderBox}>
@@ -60,11 +81,13 @@ export default function header() {
             expandIcon={<ExpandMoreIcon />} 
             className={styles.AccordionSummary}
             >
-            <Link className={styles.Link} to="/" onClick={() => setExpanded(false)}>
-              <Typography component="div" variant="h4" className={styles.HeaderText} >
-                Kino teatrai
-              </Typography>
-            </Link>
+            <div onClick={(e) => e.stopPropagation()}>
+              <Link className={styles.Link} to="/" onClick={() => setExpanded(false)}>
+                <Typography component="div" variant="h4" className={styles.HeaderText} >
+                  Kino teatrai
+                </Typography>
+              </Link>
+            </div>
           </AccordionSummary>
           <AccordionDetails className={styles.AccordionDetails}>
             <Divider orientation="horizontal" flexItem classes={{root: 'white'}}>
@@ -104,18 +127,25 @@ export default function header() {
         <Divider orientation="vertical" flexItem classes={{root: 'white'}}>
           <CircleOutlinedIcon/>
         </Divider>
-        <Accordion className={styles.Accordion}>
+        <Accordion className={styles.Accordion}
+          expanded={expandedMovie}
+          onChange={handleAccordionToggle}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />} 
             className={styles.AccordionSummary}
             >
-            <Link className={styles.Link} to="/allmovies">
-              <Typography component="div" variant="h4" className={styles.HeaderText} >
-                Filmai
-              </Typography>
-            </Link>
+            <div onClick={(e) => e.stopPropagation()}>
+              <Link className={styles.Link} to="/allmovies">
+                <Typography component="div" variant="h4" className={styles.HeaderText}>
+                  Filmai
+                </Typography>
+              </Link>
+            </div>
           </AccordionSummary>
-          <AccordionDetails className={styles.AccordionDetails}>
+          <AccordionDetails className={styles.AccordionDetails}
+              onClick={handleDetailsClick}
+          >
             <Divider orientation="horizontal" flexItem classes={{root: 'white'}}>
               <CircleOutlinedIcon/>
             </Divider>
@@ -124,9 +154,17 @@ export default function header() {
                 Mėgstamiausi Filmai
               </Typography>
             </Link>
+            <Divider orientation="horizontal" flexItem classes={{root: 'white'}}>
+              <CircleOutlinedIcon/>
+            </Divider>
+            <Link className={styles.Link} to="/upcoming">
+              <Typography component="div" variant="h4" className={styles.HeaderText}>
+                Greitai kinuose
+              </Typography>
+            </Link>
           </AccordionDetails>
         </Accordion>
-        <Divider orientation="vertical" flexItem sx={{ mx: 1, bgcolor: 'white' }}>
+        <Divider orientation="vertical" flexItem classes={{root: 'white'}}>
           <CircleOutlinedIcon />
         </Divider>
         {(!role) ? (
@@ -136,7 +174,7 @@ export default function header() {
                 Prisijungti
               </Typography>
             </Link>
-            <Divider orientation="vertical" flexItem>
+            <Divider orientation="vertical" flexItem classes={{root: 'white'}}>
               <CircleOutlinedIcon/>
             </Divider>
             <Link className={styles.Link} to="/register">
@@ -147,14 +185,53 @@ export default function header() {
           </>
         ) : (
           <>
-            <Box className={styles.Link}>
-              <Typography component="div" variant="h4" className={styles.HeaderText}>
-                {role}
-              </Typography>
-            </Box>
-            <LogoutButton handleClick={handleClick} />
+            <Accordion className={styles.Accordion}
+              expanded={expandedProfile}
+              onChange={handleAccordionProfileToggle}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />} 
+                className={styles.AccordionSummary}
+                >
+                <Typography component="div" variant="h4" className={styles.HeaderText}>
+                  {role}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails className={styles.AccordionDetails}
+                  onClick={handleDetailsProfileClick}
+              >
+                <Divider orientation="horizontal" flexItem classes={{root: 'white'}}>
+                  <CircleOutlinedIcon/>
+                </Divider>
+                <Link className={styles.Link} 
+                  to="/tickets">
+                  <Typography component="div" variant="h4" className={styles.HeaderText} >
+                    Bilietai
+                  </Typography>
+                </Link>
+                <Divider orientation="horizontal" flexItem classes={{root: 'white'}}>
+                  <CircleOutlinedIcon/>
+                </Divider>
+                <LogoutButton handleClick={handleClick} />
+              </AccordionDetails>
+            </Accordion>
           </>
         )}
+
+        {(role == 'admin' || role == 'adminscan') ? (
+            <>
+              <Divider orientation="vertical" flexItem classes={{root: 'white'}}>
+                <CircleOutlinedIcon/>
+              </Divider>
+              <Link className={styles.Link} to="/scanTickets">
+                <Typography component="div" variant="h4" className={styles.HeaderText}>
+                  Skanuoti bilietus
+                </Typography>
+              </Link>
+            </>
+        ) : (<></>)
+      }
+
       </Box>
       <Outlet />
     </Box>

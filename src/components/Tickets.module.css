@@ -1,0 +1,44 @@
+.Text {
+  padding-top: 3em;
+  color: white;
+  text-transform: uppercase;
+  font-size: 2vw;
+  font-family: 'Roboto', sans-serif;
+  display: block;
+}
+
+.CardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+}
+
+.Card {
+  position: relative;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; 
+  padding: 2em;
+  margin: 1em;
+  width: 45%;
+  border-radius: 1em;
+  background-color: #222; 
+  color: white; 
+}
+
+@media (max-width: 768px) {
+  .Card {
+    width: 90%; 
+  }
+}
+
+.QR {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+.TicketInfo {
+  flex: 1;
+}

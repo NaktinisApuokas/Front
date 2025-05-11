@@ -13,9 +13,11 @@ import { Card,
   MenuItem,
   IconButton,
   CardActions,
-  TextField } from '@mui/material';
+  TextField,
+  Button } from '@mui/material';
 import MovieEditButton from './MovieEditButton';
 import MovieDeleteButton from './MovieDeleteButton';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { AuthContext } from '../App';
 
 function AllMoviesList({movies, url, deleteUrl, id, onDelete}) {
@@ -25,32 +27,15 @@ function AllMoviesList({movies, url, deleteUrl, id, onDelete}) {
   const [selectedPrice, setSelectedPrice] = useState();
   const [arrayToFilter, setArrayToFilter] = useState(movies);
   const { role } = useContext(AuthContext);
-
+  const [showTrailer, setShowTrailer] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  function CalculateTimeLeft(time) {
-    var both  = time.split(':');
-    var hours = both[0];
-    var minutes = both[1];
-    let today = new Date();
-    var lefth = hours - today.getHours();
-    var leftmin = minutes - today.getMinutes();
-    if(leftmin < 0){
-      leftmin = leftmin + 60;
-      lefth--;
-    }
-    if(lefth < 0){
-      lefth = "0";
-    }
-    if(lefth < 10){
-      lefth = '0' + lefth;
-    }
-    
-    if(leftmin < 10){
-      leftmin = '0' + leftmin;
-    }
-    return(`${lefth}:${leftmin}`);
-  }
+  const toggleTrailer = (id) => {
+    setShowTrailer(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -118,17 +103,13 @@ const handleSearchChange = (event) => {
 
   return (
     <div className={styles.BackGround}>
-      {(role === 'admin') && (
-      <Box className={styles.AddButton}>
-        <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Pridėti filmą </button></Link>
-      </Box>
-      )}
       <Box className={styles.Box}>
         <TextField
           label="Paieška"
           variant="outlined"
           value={searchTerm}
           onChange={handleSearchChange}
+          id='search'
         />
         <Typography variant="subtitle1" color="text.secondary" className={styles.FilterText}>
           <b>Filtruoti: </b>
@@ -209,43 +190,52 @@ const handleSearchChange = (event) => {
           <Card className={styles.Card}>
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
               <CardMedia
-                className={styles.Photo}
+                className={styles.Photo} 
                 image={movie.img}
               />
               <CardContent sx={{ flex: '1 0 auto' }}>
-              <Link className={styles.Link} key={movie.id} to="/screenings" state={{ type: id, movieid: movie.id }}>
+              <Link to={`/screenings/${id}/${movie.id}`} className={styles.Link}>
                 <Typography component="div" variant="h3" className={styles.MovieTitle}>
                 {movie.title}
                 </Typography>
               </Link>
+              <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+                  {movie.titleEng}
+                </Typography>
               <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
                 <b>Žanras: </b>{movie.genre}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
               <b>Trukmė: </b>{movie.duration}
               </Typography>
-              <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-              {movie.cinema.name}
-              </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                {/* {movie.screenings.map((screening) => (
-                  <Typography variant="h5" className={styles.MovieGenre}>
-                  {screening.time}
-                  </Typography>
-                ))} */}
-              </Box>
-              </CardContent>
-              <Box>
-                {/* <Typography variant="h2" className={styles.TimeLeft}>
-                  Liko laiko: {CalculateTimeLeft(movie.screenings[0].time)}
-                </Typography> */}
-                {/* <Typography variant="h4" className={styles.MovieGenre} >
-                  Laisvos vietos: {movie.screenings[0].emptyseatnumber}
+
+              <Box className={styles.GenreRow}>
+                <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+                {movie.cinema.name}
                 </Typography>
-                <Typography variant="h6" className={styles.MovieGenre} >
-                  Kaina: {movie.screenings[0].price}
-                </Typography> */}
+
+                {movie.trailerURL && (
+                    <Button
+                    sx={{
+                      fontWeight: 'bold',
+                      border: '5px solid #6d8e9c',
+                      borderRadius: '5px',
+                      color: 'black',
+                      marginRight: '45px',
+                      '&:hover': {
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                      },
+                    }}
+                    onClick={() => toggleTrailer(movie.id)}
+                    startIcon={<PlayArrowRoundedIcon sx={{ color: 'black' }} />}
+                    >
+                      Žiūrėti anonsą
+                    </Button>
+                  )}
               </Box>
+              
+
+              </CardContent>
               <CardActions>
               {(role === 'admin') && (
                 <>
@@ -259,6 +249,22 @@ const handleSearchChange = (event) => {
               )}
               </CardActions>
             </Box>
+            {showTrailer[movie.id] && (
+                <Box className={styles.TrailerOverlay}>
+                  <Box className={styles.YoutubeCard}>
+                    <button className={styles.CloseButton} onClick={() => toggleTrailer(movie.id)}>✖</button>
+                    <iframe
+                      width="1120"
+                      height="630"
+                      src={movie.trailerURL.replace("watch?v=", "embed/")}
+                      title={`${movie.title} trailer`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </Box>
+                </Box>
+              )}
           </Card>
         ))
       }

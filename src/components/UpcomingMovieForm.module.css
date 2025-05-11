@@ -1,0 +1,16 @@
+.Title{
+    padding-top: 0.5em;
+    margin-left: 1em !important;
+}
+
+.FormBox {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 1em;
+    margin-right: 1em; 
+    margin-bottom: 2em;
+}
+
+.FormWidth {
+    flex-grow: 1;
+}

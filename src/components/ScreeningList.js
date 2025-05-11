@@ -12,9 +12,9 @@ import {
   Typography, 
   Tab
  } from '@mui/material';
-import TabContext from '@material-ui/lab/TabContext';
-import TabList from '@material-ui/lab/TabList';
-import TabPanel from '@material-ui/lab/TabPanel';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 import styles from './ScreeningList.module.css';
 import { AuthContext } from '../App';
 import Accordion from '@mui/material/Accordion';
@@ -25,12 +25,14 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CommentCard from './CommentCard';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
+import TicketModal from "./TicketModal";
 
 function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, onReviewSubmitted, onCommentSubmitted, onDelete}) {
   const { role } = useContext(AuthContext);
   const [value, setValue] = React.useState('1');
   const [expandedReview, setExpandedReview] = useState(false);
   const [expandedComment, setExpandedComment] = useState(false);
+  const [selectedScreeningId, setSelectedScreeningId] = useState(null);
 
   const handleExpandedReviewChange = () => {
     setExpandedReview(!expandedReview);
@@ -50,6 +52,14 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleBuyClick = (id) => {
+    setSelectedScreeningId(id);
+  };
+
+  const closeModal = () => {
+    setSelectedScreeningId(null);
   };
 
   return (
@@ -118,6 +128,7 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
                   <MDBTableBody>
                     {screenings.map(screening => (
                       <tr key={screening.id}>
+               
                         <td>
                           <Typography variant="h5" className={styles.TableText}>
                             {screening.time}
@@ -136,10 +147,16 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
                         <td>
                           <a href={screening.url} target="_blank" rel="noreferrer">
                             <button className="btn btn-dark btn-lg w-40">
-                              Įsigyti bilietą
+                               Nuoroda į bilieto Įsigyjimą
                               <OpenInNewIcon className={styles.OpenInNewIcon}/>
                             </button>
                           </a>
+                        </td>
+                        <td>
+                          <button className="btn btn-dark btn-lg w-40"
+                          onClick={() => handleBuyClick(screening.id)}>
+                            Įsigyti bilietą
+                          </button>
                         </td>
                         {(role === 'admin') && (
                           <>
@@ -218,7 +235,12 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
         <button className="btn btn-light btn-lg w-40"> Pridėti seansą </button>
       </Link>
       )}
-      
+      {selectedScreeningId && (
+        <TicketModal
+        screeningId={selectedScreeningId}
+        onClose={closeModal}
+      />
+      )}
     </div>
   );
 }

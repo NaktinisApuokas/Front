@@ -15,7 +15,8 @@ import {
   InputLabel, 
   Select, 
   MenuItem,
-  TextField } from '@mui/material';
+  TextField,
+  Button } from '@mui/material';
 import MovieEditButton from './MovieEditButton';
 import MovieDeleteButton from './MovieDeleteButton';
 import { AuthContext } from '../App';
@@ -23,6 +24,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import axios from 'axios';
 import routes from '../constants/routes';
 
@@ -33,6 +35,7 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
   const [selectedTime, setSelectedTime] = useState();
   const [selectedPrice, setSelectedPrice] = useState();
   const [open, setOpen] = useState({});
+  const [showTrailer, setShowTrailer] = useState(false);
   const [favorite, setFavorite] = useState(() => {
     const initialFavorites = {};
     movies.forEach((movie) => {
@@ -44,33 +47,6 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  function CalculateTimeLeft(time) {
-    var both  = time.split(':');
-    var hours = both[0];
-
-    var minutes = both[1];
-    let today = new Date();
-    
-    var lefth = hours - today.getHours();
-    var leftmin = minutes - today.getMinutes();
-
-    if(leftmin < 0){
-      leftmin = leftmin + 60;
-      lefth--;
-    }
-    if(lefth < 0){
-      lefth = "0";
-    }
-    if(lefth < 10){
-      lefth = '0' + lefth;
-    }
-    
-    if(leftmin < 10){
-      leftmin = '0' + leftmin;
-    }
-    return(`${lefth}:${leftmin}`);
-  }
-
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
   }
@@ -80,6 +56,15 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
   function handlePriceChange(event) {
     setSelectedPrice(event.target.value);
   }
+
+  const toggleTrailer = (id) => {
+    setShowTrailer(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -165,9 +150,16 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
       .catch(error => console.log(error));
   };
 
+  const getEmbedUrl = (url) => {
+    if (!url) return null;
+    const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  };
+
+
   return (
     <div className={styles.BackGround}>
-      {(role === 'admin') && (
+      {role === 'admin' && id !== undefined && id !== null && id !== 0 && (
       <Box className={styles.AddButton}>
         <Link to="/add_movie" state={{ type: id }}><button className="btn btn-light text-dark btn-lg w-40"> Pridėti filmą </button></Link>
       </Box>
@@ -246,11 +238,14 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
                   sx={{ objectFit: "fill", width: '15em', flex: '0 0 auto' }}
                 />
                 <CardContent sx={{ flex: '0 1 auto' }} className={styles.CardContent}>
-                <Link className={styles.Link} key={movie.id} to="/screenings" state={{ type: id, movieid: movie.id }}>
+                <Link to={`/screenings/${id}/${movie.id}`} className={styles.Link}>
                   <Typography component="div" variant="h4" className={styles.MovieTitle}>
                   {movie.title}
                   </Typography>
                 </Link>
+                <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
+                  {movie.titleEng}
+                </Typography>
                 <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
                   <b>Žanras: </b>{movie.genre}
                 </Typography>
@@ -265,10 +260,19 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
                       </Typography>
                     </Box>
                   ))}
+                  {movie.trailerURL && (
+                    <Button
+                      className={styles.TrailerButton}
+                      onClick={() => toggleTrailer(movie.id)}
+                      startIcon={<PlayArrowRoundedIcon sx={{ color: 'black' }} />}
+                    >
+                      Žiūrėti anonsą
+                    </Button>
+                  )}
                 </Box>
                 <Box>
                   <Typography variant="h6" className={styles.MovieGenre} >
-                    Kaina: {movie.screenings[0].price}
+                    Kaina: {movie.screenings[0]?.price}
                   </Typography>
                 </Box>
                 </CardContent>
@@ -308,6 +312,22 @@ function MoviesList({movies, url, deleteUrl, id, onDelete}) {
                   </Typography>
                 </CardContent>
               </Collapse>
+              {showTrailer[movie.id] && (
+                <Box className={styles.TrailerOverlay}>
+                  <Box className={styles.YoutubeCard}>
+                    <button className={styles.CloseButton} onClick={() => toggleTrailer(movie.id)}>✖</button>
+                    <iframe
+                      width="1120"
+                      height="630"
+                      src={getEmbedUrl(movie.trailerURL)}
+                      title={`${movie.title} trailer`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </Box>
+                </Box>
+              )}
           </Card>
         ))
       }

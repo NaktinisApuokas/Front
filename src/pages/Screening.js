@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext }  from 'react';
 import ScreeningList from '../components/ScreeningList';
-import {useLocation}  from 'react-router-dom';
+import { useLocation, useParams }  from 'react-router-dom';
 import routes from '../constants/routes';
 import useQuery from '../hooks/useQuery';
 import { AuthContext } from '../App';
@@ -12,8 +12,8 @@ export default function Screening() {
   const [screenings, setScreenings] = useState([]);
   const { role } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
-  const movieid = useLocation().state.movieid;
-  const id = useLocation().state.type;
+
+  const { id, movieId: movieid } = useParams();
 
   const urlformovie = `${routes}/cinemas/${id}/movies/${movieid}`;
   const { data:movie } = useQuery(urlformovie);

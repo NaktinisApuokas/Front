@@ -86,6 +86,7 @@
 }
 
 .HeaderBox {
+    height: 11em;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
