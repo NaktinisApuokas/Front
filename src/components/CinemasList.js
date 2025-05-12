@@ -13,8 +13,9 @@ import styles from './CinemasList.module.css';
 import MovieDeleteButton from './MovieDeleteButton';
 import MovieEditButton from './MovieEditButton';
 import CinemaInfoButton from './CinemaInfoButton';
+import ViewHeadlineRoundedIcon from '@mui/icons-material/ViewHeadlineRounded';
+import ViewModuleRoundedIcon from '@mui/icons-material/ViewModuleRounded';
 import { AuthContext } from '../App';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 const CinemaMap = lazy(() => import('./CinemaMap'));
 
 function CinemasList({ cinemas, onDelete, city, cityImg }) {
@@ -22,6 +23,7 @@ function CinemasList({ cinemas, onDelete, city, cityImg }) {
   const [selected, setSelected] = useState(null);
   const [showMap, setShowMap] = useState(false);
   const [mapMounted, setMapMounted] = useState(false);
+  const [itemsPerRow, setItemsPerRow] = useState(2);
 
   useEffect(() => {
     if (showMap) {
@@ -35,6 +37,9 @@ function CinemasList({ cinemas, onDelete, city, cityImg }) {
     }
   }, [showMap]);
 
+  const toggleItemsPerRow = () => {
+    setItemsPerRow(prev => (prev === 2 ? 1 : 2));
+  };
 
   return (
     <div className={styles.InnerBackGround}>
@@ -67,20 +72,38 @@ function CinemasList({ cinemas, onDelete, city, cityImg }) {
         </div>
       </div>
 
-      {role === 'admin' && (
-        <div className="mt-5">
-          <Link to="/add_cinema">
-            <button className="btn btn-light btn-lg w-40">
-              Pridėti kino teatrą
+      {role === 'admin' ? (
+        <div className={styles.AdminButtonRow}>
+          <div className={styles.AdminButton}>
+            <Link to="/add_cinema">
+              <button className="btn btn-light btn-lg w-40">
+                Pridėti kino teatrą
+              </button>
+            </Link>
+          </div>
+          <div className={styles.ButtonWrapper}>
+            <button onClick={toggleItemsPerRow} className={styles.ToggleButton}>
+              {itemsPerRow === 1 ? <ViewModuleRoundedIcon /> : <ViewHeadlineRoundedIcon />}
             </button>
-          </Link>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.ButtonRow}>
+          <div className={styles.ButtonWrapper}>
+            <button onClick={toggleItemsPerRow} className={styles.ToggleButton}>
+              {itemsPerRow === 1 ? <ViewModuleRoundedIcon /> : <ViewHeadlineRoundedIcon />}
+            </button>
+          </div>
         </div>
       )}
 
       {cinemas.length === 0 ? (
         <Card className={styles.NoCinemas}>Nėra kino teatrų</Card>
       ) : (
-        cinemas.map((cinema) => (
+        <div className={`${styles.Container} ${
+          itemsPerRow === 2 ? styles.TwoPerRow : styles.OnePerRow
+        }`}>
+        {cinemas.map((cinema) => (
           <Card key={cinema.id} className={styles.Card}>
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
               <CardMedia
@@ -88,7 +111,11 @@ function CinemasList({ cinemas, onDelete, city, cityImg }) {
                 component="img"
                 image={cinema.img}
                 alt={cinema.name}
-                sx={{ width: '20%' }}
+                sx={{ width: '20%',
+                  height: '9em',
+                  objectFit: 'contain',
+                  objectPosition: 'center'
+                 }}
               />
               <CardContent sx={{ flex: '1 0 auto' }}>
                 <Link
@@ -104,13 +131,11 @@ function CinemasList({ cinemas, onDelete, city, cityImg }) {
                   Adresas: {cinema.address}
                 </Typography>
               </CardContent>
-
-              <Box className={styles.InfoButton}>
-                <CinemaInfoButton linkstate={cinema} url={'/cinemainfo'} />
-              </Box>
-
               {role === 'admin' && (
                 <>
+                  <Box className={styles.InfoButton}>
+                    <CinemaInfoButton linkstate={cinema} url={'/cinemainfo'} />
+                  </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', pl: 5, margin: 2 }}>
                     <MovieEditButton linkstate={cinema} url={'/edit_cinema'} />
                   </Box>
@@ -122,6 +147,7 @@ function CinemasList({ cinemas, onDelete, city, cityImg }) {
             </Box>
           </Card>
         ))
+        }</div>
       )}
     </div>
   );

@@ -1,14 +1,15 @@
 import styles from './TicketModal.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import routes from '../constants/routes';
 import { 
   Box,
   Typography
  } from '@mui/material';
- import PaymentModal from './PaymentModal.js';
+import { AuthContext } from '../App';
 
 export default function TicketModal({ screeningId, onClose }) {
+  const { role, setRole } = useContext(AuthContext);
   const [seatTypes, setSeatTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [matrix, setMatrix] = useState([]);
@@ -44,6 +45,32 @@ export default function TicketModal({ screeningId, onClose }) {
   
       setCinemaHall(data);
       setMatrix(data.matrix || []);
+
+   if (!data?.matrix || data.matrix.length === 0){
+        setMatrix([]);
+      } 
+      else{
+        console.log(data);
+        const correctedMatrix = data.matrix.map((row) => [...row]);
+
+        for (let row = 0; row < correctedMatrix.length; row++) {
+          for (let col = 0; col < correctedMatrix[row].length; col++) {
+            const cell = correctedMatrix[row][col];
+
+            if (cell && cell.width > 1) {
+              for (let i = 1; i < cell.width; i++) {
+                const nextCol = col + i;
+                if (nextCol < correctedMatrix[row].length && !correctedMatrix[row][nextCol]) {
+                  correctedMatrix[row][nextCol] = { merged: true };
+                }
+              }
+            }
+          }
+        }
+
+        setMatrix(correctedMatrix);
+      }
+
     } catch (error) {
       console.error("Failed to fetch cinema hall:", error);
     }
@@ -125,6 +152,35 @@ export default function TicketModal({ screeningId, onClose }) {
     setIsModalOpen(false);
     onClose();
   };
+
+ const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const mappedSeats = selectedSeats.map(seat => ({ 
+      id: seat.data.id,
+      location: seat.key,
+      defaultPrice: seat.data.defaultPrice
+    }));
+
+    const payload = {
+      seats: mappedSeats,
+      Username: role,
+      screeningId: screeningId,
+      movieTitle: screeningInfo.movieTitle,
+      movieTitleEng: screeningInfo.movieTitleEng, 
+      cinemaName: screeningInfo.cinemaName,
+      screeningDateTime: screeningInfo.screeningDateTime
+    };
+
+    try {
+      const response = await axios.post(`${routes}/payment/create-checkout-session`, payload);
+
+      window.location.href = response.data.sessionUrl;
+    } catch (error) {
+      console.error("Stripe error:", error);
+    }
+  };
+
 
   if (!screeningId) return null;
 
@@ -254,20 +310,11 @@ export default function TicketModal({ screeningId, onClose }) {
               <strong>Bendra kaina:</strong> € {selectedSeats.reduce((sum, seat) => sum + seat.data.defaultPrice, 0).toFixed(2)}
             </div>
             {selectedSeats.length > 0 && (
-              <button type="button" className="btn btn-dark btn-lg w-100 mt-5" onClick={OpenPaymentModal}>Įsigyti</button>
+              <button type="button" className="btn btn-dark btn-lg w-100 mt-5" onClick={handleSubmit}>Įsigyti</button>
             )}
           </form>
         </Box>
       </div>
-      {isModalOpen && (
-        <PaymentModal
-          screeningId={screeningId}
-          screeningInfo={screeningInfo}
-          onClose={ClosePaymentModal}
-          selectedSeats={selectedSeats}
-          submit={CloseBothModals}
-        />
-      )}
     </div>
   );
 }

@@ -32,7 +32,7 @@ import './css/app.module.css';
 export const AuthContext = createContext();
 
 export default function App() {
-  const [role, setRole] = useState('admin');
+  const [role, setRole] = useState('');
   const style = {
     backgroundColor: '#34454c', 
     margin: 0,

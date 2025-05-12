@@ -10,6 +10,8 @@ import {
  import { AuthContext } from '../App';
  import routes from '../constants/routes';
  import QRCode from 'react-qr-code';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Tickets() {
   const { role, setRole } = useContext(AuthContext);
@@ -32,6 +34,8 @@ export default function Tickets() {
     fetchTickets();
   }, []);
 
+
+  console.log(tickets);
   return (
     <Box className={allStyles.NewBackGroundColor}>
       <Box>
@@ -69,6 +73,14 @@ export default function Tickets() {
                     bgColor="#FFFFFF"
                     fgColor="#000000"
                   />
+                </div>
+                <div className={styles.IsScanned}>
+                  Nuskanuota:
+                 {ticket.IsScanned === 0 ? (
+                    <CheckIcon></CheckIcon>
+                  ) : (
+                    <CloseIcon></CloseIcon>
+                  )}
                 </div>
               </Card>
             ))}

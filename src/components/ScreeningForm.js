@@ -62,7 +62,8 @@ export default function ScreeningForm({title}) {
         price: screening.price || '',
         emptyseatnumber: screening.emptyseatnumber || '', 
         url: screening.url || '',
-        cinemaHallID: screening.cinemaHallID
+        cinemaHallID: screening.cinemaHallID,
+        Date: screening.Date
       });
     }
   }, [title, screening]);
@@ -125,6 +126,7 @@ export default function ScreeningForm({title}) {
               <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="lt">
                 <DatePicker
                   label="Pasirinkite datą"
+                  name="Date"
                   value={formData.date ? dayjs(formData.date) : null}
                   onChange={handleDateChange}
                   renderInput={(params) => (

@@ -121,9 +121,10 @@ export default function HallForm({ title, seatTypes, refreshSeatTypes, HallInfo 
       return;
     }
 
-    if(matrix && matrix.length > 0){
-      return;
-    }
+    // if(matrix && matrix.length > 0){
+    //   return;
+    // }
+
     const newMatrix = Array.from({ length: rows }, () =>
                       Array.from({ length: cols }, () => null));
     setMatrix(newMatrix);
@@ -136,8 +137,33 @@ export default function HallForm({ title, seatTypes, refreshSeatTypes, HallInfo 
         rowSorting: HallInfo.rowSorting || 'topToBottom',
         colSorting: HallInfo.colSorting || 'LeftToRight'
       });
-      setMatrix(HallInfo.matrix || []);
       setHallID(HallInfo.id);
+
+
+      if (!HallInfo?.matrix || HallInfo.matrix.length === 0){
+        setMatrix([]);
+      } 
+      else{
+        console.log(HallInfo);
+        const correctedMatrix = HallInfo.matrix.map((row) => [...row]);
+
+        for (let row = 0; row < correctedMatrix.length; row++) {
+          for (let col = 0; col < correctedMatrix[row].length; col++) {
+            const cell = correctedMatrix[row][col];
+
+            if (cell && cell.width > 1) {
+              for (let i = 1; i < cell.width; i++) {
+                const nextCol = col + i;
+                if (nextCol < correctedMatrix[row].length && !correctedMatrix[row][nextCol]) {
+                  correctedMatrix[row][nextCol] = { merged: true };
+                }
+              }
+            }
+          }
+        }
+
+        setMatrix(correctedMatrix);
+      }
     }
   }, [title, HallInfo]);
 
@@ -152,6 +178,13 @@ export default function HallForm({ title, seatTypes, refreshSeatTypes, HallInfo 
     });
   };
 
+
+const sanitizeMatrix = (matrix) => {
+  return matrix.map(row =>
+    row.map(cell => (cell && cell.merged === true ? null : cell))
+  );
+};
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -159,7 +192,7 @@ export default function HallForm({ title, seatTypes, refreshSeatTypes, HallInfo 
       name: formData.name,
       RowSorting: formData.rowSorting,
       CollumnSorting: formData.colSorting,
-      CellMatrix: matrix
+      CellMatrix: sanitizeMatrix(matrix)
     };
 
     try {

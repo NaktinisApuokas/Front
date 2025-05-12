@@ -10,11 +10,61 @@
     height: 3em;
     width: 10em;
 }
+
+.Container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .Card {
-    margin: 1.3rem 1.3rem;
+    margin: 1.3rem 0;
     margin-top: 2rem;
     height: 9em;
 }
+
+.TwoPerRow .Card {
+  width: 48%;
+}
+
+.OnePerRow .Card {
+  width: 100%;
+}
+
+.ToggleButton {
+  margin-top: -2em;
+  padding: 0.1em 0.2em;
+  cursor: pointer;
+  border-radius: 15px;
+  border: white 4px solid;
+  color: white;
+  scale: 2;
+  background-color: #34454c;
+}
+
+.AdminButtonRow {
+  display: flex;
+  margin-top: 3em;
+  gap: 1em;
+  position: relative;
+}
+
+.ButtonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3em;
+  margin-right: 2em;
+}
+
+.AdminButton {
+  margin: 0 auto;
+}
+
+.ButtonWrapper {
+  position: relative;
+  right: 2em;
+}
+
 .ButtonCard {
     display: flex;
     justify-content: center;
@@ -35,6 +85,8 @@
 .Photo {
     height: 9em;
     width: 20%;
+    object-fit: contain;
+    object-position: center;
 }
 
 .MovieButton{
@@ -148,7 +200,7 @@
     transform: translate(-50%, -50%);
     color: white;
     text-transform: uppercase;
-    font-size: 6vw;
+    font-size: 5vw;
     font-family: 'Roboto', sans-serif;
 }
 

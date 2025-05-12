@@ -60,11 +60,9 @@ function CinemaHallsList({halls, cinemaInfo, url, deleteUrl, id, onDelete}) {
         <Card className={styles.HallCard}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <CardContent sx={{ flex: '0 1 auto' }} className={styles.CardContent}>
-              <Link className={styles.Link} key={CinemaHall.id} to="/screenings" state={{ type: id, movieid: CinemaHall.id }}>
-                <Typography component="div" variant="h4" className={styles.MovieTitle}>
-                  {CinemaHall.name}
-                </Typography>
-              </Link>
+              <Typography component="div" variant="h4" className={styles.MovieTitle}>
+                {CinemaHall.name}
+              </Typography>
               <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
                 <b>Vietų skaičius: </b>{CinemaHall.numberOfSeats}
               </Typography>

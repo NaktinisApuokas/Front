@@ -24,8 +24,8 @@
   margin: 1em;
   width: 45%;
   border-radius: 1em;
-  background-color: #222; 
-  color: white; 
+  background-color: white; 
+  color: black; 
 }
 
 @media (max-width: 768px) {
@@ -36,9 +36,18 @@
 
 .QR {
   position: absolute;
-  top: 1em;
-  right: 1em;
+  bottom: 2em;
+  right: 2em;
+  Scale: 1.5;
 }
+
+.IsScanned {
+  position: absolute;
+  bottom: 1em;
+  right: 9em;
+  color: black; 
+}
+
 .TicketInfo {
   flex: 1;
 }
