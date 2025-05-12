@@ -62,6 +62,9 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
     setSelectedScreeningId(null);
   };
 
+
+  console.log(screenings);
+
   return (
     <div className={styles.InnerBackGround}>
       <Card >
@@ -144,20 +147,24 @@ function ScreeningList({screenings, url, id, movieid, movie, comments, reviews, 
                             {screening.emptyseatnumber}
                           </Typography>
                         </td>
-                        <td>
-                          <a href={screening.url} target="_blank" rel="noreferrer">
-                            <button className="btn btn-dark btn-lg w-40">
-                               Nuoroda į bilieto Įsigyjimą
-                              <OpenInNewIcon className={styles.OpenInNewIcon}/>
+                        {(screening.cinemaHallId == '0') && (
+                          <td>
+                            <a href={screening.url} target="_blank" rel="noreferrer">
+                              <button className="btn btn-dark btn-lg w-40">
+                                Nuoroda į bilieto Įsigyjimą
+                                <OpenInNewIcon className={styles.OpenInNewIcon}/>
+                              </button>
+                            </a>
+                          </td>
+                        )}
+                        {(screening.cinemaHallId != '0') && (
+                          <td>
+                            <button className="btn btn-dark btn-lg w-40"
+                            onClick={() => handleBuyClick(screening.id)}>
+                              Įsigyti bilietą
                             </button>
-                          </a>
-                        </td>
-                        <td>
-                          <button className="btn btn-dark btn-lg w-40"
-                          onClick={() => handleBuyClick(screening.id)}>
-                            Įsigyti bilietą
-                          </button>
-                        </td>
+                          </td>
+                        )}
                         {(role === 'admin') && (
                           <>
                             <td>

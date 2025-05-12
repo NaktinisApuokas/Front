@@ -60,7 +60,7 @@ function AllMoviesList({movies, url, deleteUrl, id, onDelete}) {
     if (!selectedCity || selectedCity === "Visi") {
       return array;
     }
-    return array.filter((movie) => movie.cinema.name.includes(selectedCity));
+    return array.filter((movie) => movie.cinemaName.includes(selectedCity));
   }
 
   useEffect(() => {
@@ -211,7 +211,7 @@ const handleSearchChange = (event) => {
 
               <Box className={styles.GenreRow}>
                 <Typography variant="subtitle1" color="text.secondary" className={styles.MovieGenre}>
-                {movie.cinema.name}
+                {movie.cinemaName}
                 </Typography>
 
                 {movie.trailerURL && (
