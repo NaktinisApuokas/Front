@@ -21,10 +21,12 @@ export default function PaymentSuccess() {
     const fetchSession = async () => {
       try {
         const sessionRes = await axios.get(`${routes}/payment/session/${sessionId}`);
-        const { screeningId, seats } = sessionRes.data;
+        const { screeningId, username, seats } = sessionRes.data;
 
+        console.log(sessionRes.data);
+        setRole(username);
         const payload = {
-          Username: role,
+          Username: username,
           SelectedSeats: seats.map(seat => ({
             id: seat.id, 
             defaultPrice: seat.defaultPrice,

@@ -122,6 +122,14 @@ export default function header() {
                 Šiauliai
               </Typography>
             </Link>
+               <Divider orientation="horizontal" flexItem classes={{root: 'white'}}>
+              <CircleOutlinedIcon/>
+            </Divider>
+            <Link className={styles.Link} to="/cinemas" state={{ city: 'Kiti miestai' }} onClick={() => setExpanded(false)}>
+              <Typography component="div" variant="h4" className={styles.HeaderText}>
+                Kiti miestai
+              </Typography>
+            </Link>
           </AccordionDetails>
         </Accordion>
         <Divider orientation="vertical" flexItem classes={{root: 'white'}}>
