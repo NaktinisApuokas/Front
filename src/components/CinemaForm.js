@@ -73,7 +73,7 @@ export default function CinemaForm({ title }) {
       const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: formData.address,
-          key: 'AIzaSyDkHdhPddPL7Hckk65jEcm3SAsri83VzyY', 
+          key: 'x', 
         },
       });
 

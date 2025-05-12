@@ -14,7 +14,7 @@ export default function CinemaMap({ cinemas, selected, setSelected }) {
   };
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyDkHdhPddPL7Hckk65jEcm3SAsri83VzyY">
+    <LoadScript googleMapsApiKey="x">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={7.2}
